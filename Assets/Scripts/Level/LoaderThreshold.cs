@@ -28,21 +28,7 @@ public class LoaderThreshold : MonoBehaviour {
 
         if (!this._inTrigger) return;
 
-        this.UpdateFromRight();
         this.ProcessLevel();
         this._inTrigger = false;
-    }
-
-    private void UpdateFromRight() {
-        Collider2D collider2D = this.GetComponent<Collider2D>();
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-
-        if (collider2D == null || player == null) return;
-
-        if (player.transform.position.x > collider2D.bounds.max.x) {
-            this.FromRight = false;
-        } else {
-            this.FromRight = true;
-        }
     }
 }

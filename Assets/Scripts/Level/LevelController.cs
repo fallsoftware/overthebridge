@@ -3,61 +3,66 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour {
-    public GameObject LoaderThreshold;
+    public string FirstLevelToLoad;
+
     public static LevelController StaticRef;
 
     private LoaderObject _sourceLoaderObject;
+    private bool _firstLoad = false;
 
 	void Start() {
 	    LevelController.StaticRef = this;
-	    LoaderObject loaderObject = 
-            (LoaderObject) GameObject.FindObjectOfType(typeof(LoaderObject));
-        this.LoadLevel(loaderObject);
+        this.LoadFirstLevel(this.FirstLevelToLoad);
     }
 	
 	void Update() {
 	
 	}
 
-    public void LoadLevel(LoaderObject loaderObject) {
-        if (loaderObject.tag == "Processed") return;
+    public void LoadLevel(LoaderObject loaderObject, string levelNameToLoad) {
+        Scene levelToLoad = SceneManager.GetSceneByName(levelNameToLoad);
 
-        loaderObject.tag = "Processed";
-
-        string levelToLoad = this.GetLevelToLoad(loaderObject);
-
-        if (levelToLoad == null) return;
-
-        Scene sceneToLoad = SceneManager.GetSceneByName(levelToLoad);
-
-        if (sceneToLoad.isLoaded) return;
+        if (levelToLoad.isLoaded) return;
     
-        SceneManager.LoadScene(levelToLoad, LoadSceneMode.Additive);
+        SceneManager.LoadScene(levelNameToLoad, LoadSceneMode.Additive);
+
         this._sourceLoaderObject = loaderObject;
+        this._firstLoad = false;
     }
 
-    public void SetupLevel(LevelHandler levelHandler) {
-        if (levelHandler.tag == "Processed") return;
+    public void LoadFirstLevel(string levelNameToLoad) {
+        Scene levelToLoad = SceneManager.GetSceneByName(levelNameToLoad);
 
-        levelHandler.tag = "Processed";
+        if (levelToLoad.isLoaded) return;
 
+        SceneManager.LoadScene(levelNameToLoad, LoadSceneMode.Additive);
+
+        this._firstLoad = true;
+    }
+
+    public void SetupLevel(LevelLoader levelLoader) {
         if (this._sourceLoaderObject) {
-            Vector3 offset = levelHandler.GetOffset();
-            levelHandler.gameObject.transform.Translate(offset);
+            Vector3 offset;
+
+            if (levelLoader.IsNext) {
+                offset = levelLoader.GetNextLevelOffset();
+            } else {
+                offset = levelLoader.GetPreviousLevelOffset();
+            }
+
+            levelLoader.gameObject.transform.Translate(offset);
 
             this._sourceLoaderObject = null;
         }
+
+        if (this._firstLoad) {
+            this.firstLoadSetup(levelLoader);
+        }
     }
 
-    private string GetLevelToLoad(LoaderObject loaderObject) {
-        string levelToLoad = null;
-
-        levelToLoad = loaderObject.LevelName;
-
-        if (String.IsNullOrEmpty(levelToLoad)) {
-            return null;
-        }
-
-        return levelToLoad;
+    private void firstLoadSetup(LevelLoader levelLoader) {
+        GameObject root = LevelLoader.FindRoot(levelLoader.gameObject.scene);
+        LevelManager levelManager = root.GetComponent<LevelManager>();
+        levelManager.SetToCheckpointAtStart = true;
     }
 }

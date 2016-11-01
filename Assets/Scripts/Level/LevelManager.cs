@@ -3,13 +3,13 @@ using System.Collections;
 
 public class LevelManager : MonoBehaviour {
     public Checkpoint LastCheckpoint;
-    public bool setToCheckpointAtStart = false;
+    [HideInInspector] public bool SetToCheckpointAtStart = false;
     [HideInInspector] public GameObject player;
 
 	void Start () {	    
 	    this.player = GameObject.FindGameObjectWithTag("Player");
 
-        if (this.setToCheckpointAtStart) {
+        if (this.SetToCheckpointAtStart) {
             this.SetPlayerToLastCheckpoint();
         }
     }

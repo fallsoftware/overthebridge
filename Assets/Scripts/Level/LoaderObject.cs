@@ -1,67 +1,79 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public enum Location {
-    LEFT,
-    RIGHT
-}
-
 public class LoaderObject : MonoBehaviour {
-    public string LevelName = "LevelName";
-    public string LevelRoot = "LevelRoot";
-    public Location Location;
+    public LevelLoader LevelLoader;
     [HideInInspector] public bool FromRight = false;
-    private bool toUnload = false;
+    private string levelToUnload = null;
 
     void Start() {
     }
 
     void Update() {
-        if (this.toUnload) {
+        if (this.levelToUnload != null) {
             // should check if any physics interactions before...
-            SceneManager.UnloadScene(this.LevelName);
-            this.toUnload = false;
+            SceneManager.UnloadScene(this.levelToUnload);
+            this.levelToUnload = null;
         }
     }
 
     public void HandleLevel() {
-        if (this.Location == Location.RIGHT) {
-            this.HandleRight();
-        } else if (this.Location == Location.LEFT) {
-            this.HandleLeft();
+        Scene previousLevel
+            = SceneManager.GetSceneByName(this.LevelLoader.PreviousLevel);
+        Scene nextLevel
+            = SceneManager.GetSceneByName(this.LevelLoader.NextLevel);
+        string levelToAdd = null;
+        string levelToRemove = null;
+
+        if (previousLevel.isLoaded) { // the player goes to the right
+            levelToAdd = this.LevelLoader.NextLevel;
+            levelToRemove = this.getLevelBeforePreviousLevel(previousLevel);
+        } else if (nextLevel.isLoaded) { // the player goes to the left
+            levelToAdd = this.LevelLoader.PreviousLevel;
+            levelToRemove = this.getLevelAfterNextLevel(nextLevel);
+        } else { // first level loaded
+            levelToAdd = this.LevelLoader.NextLevel;
+        }
+
+        if (!String.IsNullOrEmpty(levelToAdd)) {
+            this.addLevel(levelToAdd);
+        }
+
+        if (!String.IsNullOrEmpty(levelToRemove)) {
+            this.removeLevel(levelToRemove);
         }
     }
 
-    public void HandleLeft() {
-        LoaderThreshold loaderThreshold = (LoaderThreshold)
-            GameObject.FindObjectOfType(typeof(LoaderThreshold));
+    private void removeLevel(string level) {
+        if (!SceneManager.GetSceneByName(level).isLoaded) return;
 
-        if (loaderThreshold.FromRight) {
-            this.AddScene();
-        } else {
-            this.RemoveScene();
-        }
+        Destroy(LevelLoader.FindRoot(SceneManager.GetSceneByName(level)));
+        this.levelToUnload = level;
     }
 
-    public void HandleRight() {
-        LoaderThreshold loaderThreshold = (LoaderThreshold) 
-            GameObject.FindObjectOfType(typeof(LoaderThreshold));
-
-        if (!loaderThreshold.FromRight) {
-            this.AddScene();
-        } else {
-            this.RemoveScene();
-        }
+    private void addLevel(string level) {
+        LevelController.StaticRef.LoadLevel(this, level);
     }
 
-    public void RemoveScene() {
-        GameObject levelToDestroy = GameObject.Find(this.LevelRoot);
-        Destroy(levelToDestroy);
-        this.toUnload = true;
+    private string getLevelBeforePreviousLevel(Scene level) {
+        GameObject root = LevelLoader.FindRoot(level);
+
+        if (root == null) return null;
+
+        LevelLoader levelLoader = root.GetComponent<LevelLoader>();
+
+        return levelLoader.PreviousLevel;
     }
 
-    public void AddScene() {
-        LevelController.StaticRef.LoadLevel(this);
+    private string getLevelAfterNextLevel(Scene level) {
+        GameObject root = LevelLoader.FindRoot(level);
+
+        if (root == null) return null;
+
+        LevelLoader levelLoader = root.GetComponent<LevelLoader>();
+
+        return levelLoader.NextLevel;
     }
 }
