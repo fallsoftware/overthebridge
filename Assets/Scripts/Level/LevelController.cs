@@ -63,6 +63,6 @@ public class LevelController : MonoBehaviour {
     private void firstLoadSetup(LevelLoader levelLoader) {
         GameObject root = LevelLoader.FindRoot(levelLoader.gameObject.scene);
         LevelManager levelManager = root.GetComponent<LevelManager>();
-        levelManager.SetToCheckpointAtStart = true;
+        levelManager.SetPlayerToLastCheckpoint();
     }
 }

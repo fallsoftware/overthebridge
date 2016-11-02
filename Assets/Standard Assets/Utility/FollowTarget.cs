@@ -12,7 +12,8 @@ namespace UnityStandardAssets.Utility
 
         private void LateUpdate()
         {
-            transform.position = target.position + offset;
+            transform.position = new Vector3(target.position.x, 
+                target.position.y, 0) + offset;
         }
     }
 }

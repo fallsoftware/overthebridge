@@ -12,7 +12,7 @@ public class Checkpoint : MonoBehaviour {
 	}
 
     public void OnTriggerEnter2D(Collider2D collider2D) {
-        if (this.levelManager.LastCheckpoint.Index < this.Index) {
+        if (this.levelManager.LastCheckpoint.Index <= this.Index) {
             this.levelManager.UpdateCheckpoint(this);
         }
     }

@@ -129,6 +129,33 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4000013132066488, guid: 69733e0474d78bf4ca0832e9d1b9c733, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013132066488, guid: 69733e0474d78bf4ca0832e9d1b9c733, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013132066488, guid: 69733e0474d78bf4ca0832e9d1b9c733, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50000013021401208, guid: 69733e0474d78bf4ca0832e9d1b9c733,
+        type: 2}
+      propertyPath: m_GravityScale
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013480693950, guid: 69733e0474d78bf4ca0832e9d1b9c733,
+        type: 2}
+      propertyPath: JumpForce
+      value: 1300
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013480693950, guid: 69733e0474d78bf4ca0832e9d1b9c733,
+        type: 2}
+      propertyPath: MaxSpeed
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 69733e0474d78bf4ca0832e9d1b9c733, type: 2}
   m_IsPrefabParent: 0
@@ -170,11 +197,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000011799697808, guid: 32700bebeb6d450428b5e44fcf46e0e7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 13.7
       objectReference: {fileID: 0}
     - target: {fileID: 4000011799697808, guid: 32700bebeb6d450428b5e44fcf46e0e7, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 32.3
       objectReference: {fileID: 0}
     - target: {fileID: 4000011799697808, guid: 32700bebeb6d450428b5e44fcf46e0e7, type: 2}
       propertyPath: m_LocalPosition.z
@@ -220,7 +247,22 @@ Prefab:
     - target: {fileID: 20000012035903864, guid: 32700bebeb6d450428b5e44fcf46e0e7,
         type: 2}
       propertyPath: orthographic size
-      value: 73.33
+      value: 46.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010869165720, guid: 32700bebeb6d450428b5e44fcf46e0e7,
+        type: 2}
+      propertyPath: intensity
+      value: 0.228
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010869165720, guid: 32700bebeb6d450428b5e44fcf46e0e7,
+        type: 2}
+      propertyPath: blur
+      value: 0.825
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010869165720, guid: 32700bebeb6d450428b5e44fcf46e0e7,
+        type: 2}
+      propertyPath: blurSpread
+      value: 0.723
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 32700bebeb6d450428b5e44fcf46e0e7, type: 2}
@@ -246,7 +288,7 @@ GameObject:
   - 212: {fileID: 1882561980}
   - 114: {fileID: 1882561981}
   m_Layer: 0
-  m_Name: Background3
+  m_Name: Background1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -338,7 +380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b40662be68df645479d70583c72e6a7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FirstLevelToLoad: LevelTest1
+  FirstLevelToLoad: Level1
 --- !u!4 &2111837773
 Transform:
   m_ObjectHideFlags: 0

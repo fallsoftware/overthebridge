@@ -6,14 +6,16 @@ public class CameraFocusedScroller : MonoBehaviour {
     private Vector2 _previousCameraMovement;
 
     void Start() {
-        this._previousCameraMovement = Camera.main.transform.position;
+        this._previousCameraMovement 
+            = this.getIntVector(Camera.main.transform.position);
     }
 
     void Update() {
         Vector2 movement = new Vector2(
             this.Speed.x * this.Direction.x,
             this.Speed.y * this.Direction.y);
-        Vector2 currentCameraMovement = Camera.main.transform.position;
+        Vector2 currentCameraMovement
+            = this.getIntVector(Camera.main.transform.position);
 
         if (this._previousCameraMovement == currentCameraMovement) return;
 
@@ -25,5 +27,9 @@ public class CameraFocusedScroller : MonoBehaviour {
         movement.y *= directionToMove.y;
         this.transform.Translate(movement);
         this._previousCameraMovement = currentCameraMovement;
+    }
+
+    private Vector2 getIntVector(Vector2 vector) {
+        return new Vector2((int) vector.x, (int) vector.y);
     }
 }
