@@ -2,15 +2,15 @@
 using System.Collections;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 public class PortalPhysics : MonoBehaviour {
+    public string ColliderName = "Portal Collider";
 
-	// Use this for initialization
 	void Start () {
 	
 	}
 	
-	// Update is called once per frame
 	void Update () {
 	
 	}
@@ -142,8 +142,8 @@ public class PortalPhysics : MonoBehaviour {
             if (searchState) {
                 GameObject newObjectCollider = new GameObject();
                 newObjectCollider.transform.parent = this.gameObject.transform;
-                newObjectCollider.name = "Portal Collider";
-                newObjectCollider.tag = "Portal Collider";
+                newObjectCollider.name = this.ColliderName;
+                newObjectCollider.tag = this.ColliderName;
                 newObjectCollider.transform.localScale = new Vector3(1, 1, 1);
                 ArcCollider2D newArc
                     = newObjectCollider.AddComponent<ArcCollider2D>();
@@ -167,5 +167,19 @@ public class PortalPhysics : MonoBehaviour {
                 searchState = true;
             }
         }
+    }
+
+    public void DestroyColliders() {
+        foreach (Transform child in this.gameObject.transform) {
+            if (child.tag == this.ColliderName) {
+                Destroy(child.gameObject);
+            }
+        }
+    }
+
+    public void ComputeColliders(bool computeColliders) {
+        CircleCollider2D circle = this.GetComponent<CircleCollider2D>();
+
+        circle.enabled = computeColliders;
     }
 }

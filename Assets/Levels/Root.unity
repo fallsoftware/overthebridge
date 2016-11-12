@@ -361,7 +361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0}
-  MaxRadius: 10
+  MaxRadius: 60
   MinRadius: 0
 --- !u!1 &466978027
 GameObject:

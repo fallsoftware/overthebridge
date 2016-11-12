@@ -55,7 +55,8 @@ public class SoundManager : MonoBehaviour {
         this.FxSource.Play();
     }
 
-    public void PlayFx(AudioClip audioClip, float volume = 1f, bool loop = false) {
+    public void PlayFx(
+        AudioClip audioClip, float volume = 1f, bool loop = false) {
         this.FxSource.clip = audioClip;
         this.FxSource.loop = loop;
         this.FxSource.volume = volume;
