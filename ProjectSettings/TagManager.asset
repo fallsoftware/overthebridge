@@ -8,6 +8,9 @@ TagManager:
   - Processed
   - Level
   - Root
+  - Dark
+  - Light
+  - Portal Collider
   layers:
   - Default
   - TransparentFX
@@ -19,9 +22,9 @@ TagManager:
   - 
   - Background
   - Player
-  - 
-  - 
-  - 
+  - Dark
+  - Light
+  - Portal
   - 
   - 
   - 
@@ -45,18 +48,51 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Background3
+  - name: DefaultBackground
+    uniqueID: 432750817
+    locked: 0
+  - name: DefaultBackgroundLight
+    uniqueID: 2503447067
+    locked: 0
+  - name: Background4Light
+    uniqueID: 3849375179
+    locked: 0
+  - name: Background3Light
     uniqueID: 2586798177
     locked: 0
-  - name: Background2
+  - name: Background2Light
     uniqueID: 3408717117
     locked: 0
-  - name: Background1
+  - name: Background1Light
     uniqueID: 1640142047
     locked: 0
-  - name: Middleground
+  - name: MiddlegroundLight
     uniqueID: 1046247185
     locked: 0
-  - name: Foreground
+  - name: ForegroundLight
     uniqueID: 2134744049
+    locked: 0
+  - name: DefaultBackgroundDark
+    uniqueID: 2092248677
+    locked: 0
+  - name: Background4Dark
+    uniqueID: 2486976941
+    locked: 0
+  - name: Background3Dark
+    uniqueID: 2167439901
+    locked: 0
+  - name: Background2Dark
+    uniqueID: 275013897
+    locked: 0
+  - name: Background1Dark
+    uniqueID: 1311680517
+    locked: 0
+  - name: MiddlegroundDark
+    uniqueID: 1398727261
+    locked: 0
+  - name: ForegroundDark
+    uniqueID: 1346046193
+    locked: 0
+  - name: Portal
+    uniqueID: 3397521117
     locked: 0
