@@ -1,23 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class PortalBeingSet : StateMachineBehaviour {
-    public float Alpha = .2f;
-    private float _oldAlpha = 1f;
-    private SpriteRenderer _spriteRenderer;
+public class PortalNotSet : StateMachineBehaviour {
+    private PortalSpriteHandler _portalSpriteHandler;
 
     override public void OnStateEnter(
         Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         base.OnStateEnter(animator, stateInfo, layerIndex);
-
-        this._spriteRenderer 
-            = animator.gameObject.GetComponent<SpriteRenderer>();
-        this._oldAlpha = this._spriteRenderer.color.a;
-        Color oldColor = this._spriteRenderer.color;
-        this._spriteRenderer.color = new Color(oldColor.r,
-            oldColor.g,
-            oldColor.b,
-            this.Alpha);
+        this._portalSpriteHandler
+            = animator.gameObject.GetComponent<PortalSpriteHandler>();
+        this._portalSpriteHandler.SetAlpha(0f);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and 
@@ -29,11 +22,8 @@ public class PortalBeingSet : StateMachineBehaviour {
 
     override public void OnStateExit(
         Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-        Color oldColor = this._spriteRenderer.color;
-        this._spriteRenderer.color = new Color(oldColor.r,
-            oldColor.g,
-            oldColor.b,
-            this._oldAlpha);
+        base.OnStateEnter(animator, stateInfo, layerIndex);
+        this._portalSpriteHandler.RevertAlpha();
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove(). 

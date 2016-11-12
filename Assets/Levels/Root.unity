@@ -229,6 +229,7 @@ GameObject:
   - 114: {fileID: 386870443}
   - 95: {fileID: 386870444}
   - 114: {fileID: 386870445}
+  - 114: {fileID: 386870446}
   m_Layer: 12
   m_Name: Portal
   m_TagString: Portal
@@ -332,6 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cb5449cfecedca49868dc338a446fdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ColliderName: Portal Collider
 --- !u!95 &386870444
 Animator:
   serializedVersion: 3
@@ -363,6 +365,26 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   MaxRadius: 60
   MinRadius: 0
+--- !u!114 &386870446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 386870438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c786cb0345a00fa448f412ea4562683e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameObjects:
+  - {fileID: 386870438}
+  - {fileID: 466978027}
+  - {fileID: 759627886}
+  - {fileID: 1432047330}
+  - {fileID: 1303920090}
+  - {fileID: 1359803672}
+  - {fileID: 270992625}
+  - {fileID: 1397881376}
 --- !u!1 &466978027
 GameObject:
   m_ObjectHideFlags: 0

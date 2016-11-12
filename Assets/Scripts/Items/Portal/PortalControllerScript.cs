@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEditorInternal;
 
-public class PortalSetter : MonoBehaviour {
+public class PortalControllerScript : MonoBehaviour {
     public Vector2 position;
     public float MaxRadius = 1f;
     public float MinRadius = 0f;   
@@ -25,7 +25,8 @@ public class PortalSetter : MonoBehaviour {
     }
 
     private void handleStates() {
-        AnimatorStateInfo animStateInfo = this._animator.GetCurrentAnimatorStateInfo(0);
+        AnimatorStateInfo animStateInfo 
+            = this._animator.GetCurrentAnimatorStateInfo(0);
 
         if (Input.GetButtonDown("PortalClick")) {
             if (animStateInfo.IsName("NotSet")) {
