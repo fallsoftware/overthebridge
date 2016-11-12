@@ -43,6 +43,7 @@ public class Portal : MonoBehaviour {
             this.setShininess(oldShineLocation);
         }
 
+        this.CheckIfPlayerStillInside();
         this.updateAudioVolume();
     }
 
@@ -59,12 +60,25 @@ public class Portal : MonoBehaviour {
 
     void OnTriggerExit2D(Collider2D collider2D) {
         if (this.InDark || !this.checkIfPlayer(collider2D)) return;
+        
+        this.SetPlayerToDark();
+    }
+
+    public void SetPlayerToDark() {
         this.InDark = true;
         Portal.SetLayerRecursively(this.Player, LayerMask.NameToLayer("Dark"));
         Portal.SetSortingLayerRecursively(
             this.Player, "MiddlegroundDark");
 
         this.updateAudioClip(this.OutSound);
+    }
+
+    public void CheckIfPlayerStillInside() {
+        CircleCollider2D circle = this.GetComponent<CircleCollider2D>();
+
+        if (!circle.OverlapPoint(this.Player.transform.position)) {
+            this.SetPlayerToDark();
+        }
     }
 
     private bool checkIfPlayer(Collider2D collider2D) {
