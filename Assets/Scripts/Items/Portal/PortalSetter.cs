@@ -44,7 +44,6 @@ public class PortalSetter : MonoBehaviour {
             if (animStateInfo.IsName("BeingSet")) {
                 this._animator.SetBool("BeingSet", false);
                 this._animator.SetBool("Set", true);
-                this.handlePosition();
                 this._portalPhysics.ComputeColliders(true);
             } else if (animStateInfo.IsName("Set")) {
                 this._animator.SetBool("BeingSet", false);
