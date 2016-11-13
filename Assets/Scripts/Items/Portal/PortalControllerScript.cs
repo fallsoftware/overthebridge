@@ -4,13 +4,14 @@ using UnityEditorInternal;
 
 public class PortalControllerScript : MonoBehaviour {
     public Vector2 position;
-    public float MaxRadius = 1f;
+    public float MaxRadius = 60f;
     public float MinRadius = 0f;
     public GameObject PortalControllerSurface;
 
     private GameObject _player;
     private Animator _animator;
     private PortalPhysics _portalPhysics;
+    private bool _display = false;
 
     void Start() {
         this._player = GameObject.FindGameObjectWithTag("Player");
@@ -22,19 +23,18 @@ public class PortalControllerScript : MonoBehaviour {
 
     void Update() {
         this.handleStates();
+        this.displayPortalControllerSurface();
     }
 
     private void handleStates() {
         AnimatorStateInfo animStateInfo 
             = this._animator.GetCurrentAnimatorStateInfo(0);
 
-        if (Input.GetButtonDown("PortalClick")) {
+        if (Input.GetButtonDown("SetPortal")) {
             if (animStateInfo.IsName("NotSet")) {
-                this._animator.SetBool("BeingSet", true);
-                this.handlePosition();
-                this.displayPortalControllerSurface(true);
-                this._portalPhysics.DestroyColliders();
-                this._portalPhysics.ComputeColliders(false);
+                this.changeToBeingSetState();
+            } else if (animStateInfo.IsName("Set")) {
+                this.changeToBeingSetState();
             }
         }
 
@@ -42,21 +42,44 @@ public class PortalControllerScript : MonoBehaviour {
             this.handlePosition();
         }
 
-        if (Input.GetButtonUp("PortalClick")) {
+        if (Input.GetButtonUp("SetPortal")) {
             if (animStateInfo.IsName("BeingSet")) {
-                this.displayPortalControllerSurface(false);
-                this._animator.SetBool("BeingSet", false);
-                this._animator.SetBool("Set", true);
-                this._portalPhysics.ComputeColliders(true);
-            } else if (animStateInfo.IsName("Set")) {
-                this._animator.SetBool("BeingSet", false);
-                this.displayPortalControllerSurface(false);
-                this._animator.SetBool("Set", false);
-                this._portalPhysics.DestroyColliders();
-                this._portalPhysics.ComputeColliders(false);
-                this.handleLimit();
+                this.changeToSetState();
+            } 
+        }
+
+        if (Input.GetButtonUp("RemovePortal")) {
+            if (animStateInfo.IsName("Set")) {
+                this.changeToNotSetState();
+            } else if (animStateInfo.IsName("NotSet")) {
+                this.changeToSetState();
             }
         }
+    }
+
+    private void changeToNotSetState() {
+        this._animator.SetBool("Set", false);
+        this._animator.SetBool("BeingSet", false);
+        this._display = false;
+        this._portalPhysics.DestroyColliders();
+        this._portalPhysics.ComputeColliders(false);
+        this.handleLimit();
+    }
+
+    private void changeToBeingSetState() {
+        this._animator.SetBool("Set", false);
+        this._animator.SetBool("BeingSet", true);
+        this.handlePosition();
+        this._display = true;
+        this._portalPhysics.DestroyColliders();
+        this._portalPhysics.ComputeColliders(false);
+    }
+
+    private void changeToSetState() {
+        this._animator.SetBool("Set", true);
+        this._animator.SetBool("BeingSet", false);
+        this._display = false;
+        this._portalPhysics.ComputeColliders(true);
     }
 
     private void handlePosition() {
@@ -75,8 +98,8 @@ public class PortalControllerScript : MonoBehaviour {
         this.transform.position = playerPosition + playerPortal;
     }
 
-    private void displayPortalControllerSurface(bool display) {
-        if (display) {
+    private void displayPortalControllerSurface() {
+        if (this._display) {
             this.PortalControllerSurface.SetActive(true);
             this.renderPortalControllerSurface();
         } else {
