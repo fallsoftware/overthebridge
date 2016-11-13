@@ -13,6 +13,8 @@ public class DeathManager : MonoBehaviour {
     }
 
     public void OnTriggerEnter2D(Collider2D collider2D) {
+        if (collider2D.tag != "Player") return;
+
         this.levelManager.SetPlayerToLastCheckpoint();
     }
 }
