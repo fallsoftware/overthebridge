@@ -30,7 +30,8 @@ public class PortalControllerScript : MonoBehaviour {
         AnimatorStateInfo animStateInfo 
             = this._animator.GetCurrentAnimatorStateInfo(0);
 
-        if (Input.GetButtonDown("SetPortal")) {
+        if (Input.GetButtonDown("SetPortal") 
+            || Mathf.Round(Input.GetAxisRaw("SetPortal")) < 0) {
             if (animStateInfo.IsName("NotSet")) {
                 this.changeToBeingSetState();
             } else if (animStateInfo.IsName("Set")) {
@@ -38,14 +39,15 @@ public class PortalControllerScript : MonoBehaviour {
             }
         }
 
-        if (animStateInfo.IsName("BeingSet")) {
-            this.handlePosition();
-        }
-
-        if (Input.GetButtonUp("SetPortal")) {
+        if (Input.GetButtonUp("SetPortal") 
+            || Mathf.Round(Input.GetAxisRaw("SetPortal")) == 0) {
             if (animStateInfo.IsName("BeingSet")) {
                 this.changeToSetState();
-            } 
+            }
+        }
+
+        if (animStateInfo.IsName("BeingSet")) {
+            this.handlePosition();
         }
 
         if (Input.GetButtonUp("RemovePortal")) {
@@ -69,7 +71,6 @@ public class PortalControllerScript : MonoBehaviour {
     private void changeToBeingSetState() {
         this._animator.SetBool("Set", false);
         this._animator.SetBool("BeingSet", true);
-        this.handlePosition();
         this._display = true;
         this._portalPhysics.DestroyColliders();
         this._portalPhysics.ComputeColliders(false);
@@ -83,13 +84,24 @@ public class PortalControllerScript : MonoBehaviour {
     }
 
     private void handlePosition() {
-        Vector3 mousePosition 
-            = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0;
+        Vector3 cursorPosition;
+        Vector3 playerPortal;
+        float x = Input.GetAxis("RightH");
+        float y = Input.GetAxis("RightV");
+
         Vector3 playerPosition = this._player.transform.position;
 
-        Vector3 playerPortal 
-            = mousePosition - playerPosition;
+        if (x != 0 || y != 0) {
+            cursorPosition = new Vector3(x, y, 0) * 100f;
+            playerPortal = cursorPosition;
+        } else {
+            cursorPosition 
+                = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            cursorPosition.z = 0;
+            playerPortal = cursorPosition - playerPosition;
+        }     
+        
+        
         float distance = playerPortal.magnitude;
         distance = Mathf.Clamp(distance, 
             this.MinRadius, 
