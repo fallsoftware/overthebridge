@@ -29,31 +29,29 @@ public class PortalControllerScript : MonoBehaviour {
     private void handleStates() {
         AnimatorStateInfo animStateInfo 
             = this._animator.GetCurrentAnimatorStateInfo(0);
-
-        if (Input.GetButtonDown("SetPortal") 
-            || Mathf.Round(Input.GetAxisRaw("SetPortal")) < 0) {
-            if (animStateInfo.IsName("NotSet")) {
-                this.changeToBeingSetState();
-            } else if (animStateInfo.IsName("Set")) {
+        if (animStateInfo.IsName("Set")) {
+            if (Input.GetButtonDown("SetPortal")
+                || Mathf.Round(Input.GetAxisRaw("SetPortal")) < 0) {
                 this.changeToBeingSetState();
             }
-        }
 
-        if (Input.GetButtonUp("SetPortal") 
-            || Mathf.Round(Input.GetAxisRaw("SetPortal")) == 0) {
-            if (animStateInfo.IsName("BeingSet")) {
+            if (Input.GetButtonUp("RemovePortal")) {
+                this.changeToNotSetState();
+            }
+        } else if (animStateInfo.IsName("BeingSet")) {
+            if (Input.GetButtonUp("SetPortal")
+                || Mathf.Round(Input.GetAxisRaw("SetPortal")) == 0) {
                 this.changeToSetState();
             }
-        }
 
-        if (animStateInfo.IsName("BeingSet")) {
             this.handlePosition();
-        }
+        } else if (animStateInfo.IsName("NotSet")) {
+            if (Input.GetButtonDown("SetPortal")
+                || Mathf.Round(Input.GetAxisRaw("SetPortal")) < 0) {
+                this.changeToBeingSetState();
+            }
 
-        if (Input.GetButtonUp("RemovePortal")) {
-            if (animStateInfo.IsName("Set")) {
-                this.changeToNotSetState();
-            } else if (animStateInfo.IsName("NotSet")) {
+            if (Input.GetButtonUp("RemovePortal")) {
                 this.changeToSetState();
             }
         }
@@ -94,13 +92,15 @@ public class PortalControllerScript : MonoBehaviour {
         if (x != 0 || y != 0) {
             cursorPosition = new Vector3(x, y, 0) * 100f;
             playerPortal = cursorPosition;
-        } else {
-            cursorPosition 
+        } else if (Input.GetAxis("Mouse X") != 0
+                   || Input.GetAxis("Mouse Y") != 0) {
+            cursorPosition
                 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             cursorPosition.z = 0;
             playerPortal = cursorPosition - playerPosition;
-        }     
-        
+        } else {
+            playerPortal = this.transform.position - playerPosition;
+        }
         
         float distance = playerPortal.magnitude;
         distance = Mathf.Clamp(distance, 
