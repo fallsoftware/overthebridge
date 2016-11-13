@@ -49,11 +49,8 @@ public class Portal : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collider2D) {
         if (!this.InDark || !this.checkIfPlayer(collider2D)) return;
-        this.InDark = false;
-        Portal.SetLayerRecursively(
-            this.Player, LayerMask.NameToLayer("Light"));
-        Portal.SetSortingLayerRecursively(
-            this.Player, "MiddlegroundLight");
+
+        this.SetPlayerToLight();
 
         this.updateAudioClip(this.InSound);
     }
@@ -62,6 +59,8 @@ public class Portal : MonoBehaviour {
         if (this.InDark || !this.checkIfPlayer(collider2D)) return;
         
         this.SetPlayerToDark();
+
+        this.updateAudioClip(this.OutSound);
     }
 
     public void SetPlayerToDark() {
@@ -69,8 +68,14 @@ public class Portal : MonoBehaviour {
         Portal.SetLayerRecursively(this.Player, LayerMask.NameToLayer("Dark"));
         Portal.SetSortingLayerRecursively(
             this.Player, "MiddlegroundDark");
+    }
 
-        this.updateAudioClip(this.OutSound);
+    public void SetPlayerToLight() {
+        this.InDark = false;
+        Portal.SetLayerRecursively(
+            this.Player, LayerMask.NameToLayer("Light"));
+        Portal.SetSortingLayerRecursively(
+            this.Player, "MiddlegroundLight");
     }
 
     public void CheckIfPlayerStillInside() {
@@ -78,6 +83,8 @@ public class Portal : MonoBehaviour {
 
         if (!circle.OverlapPoint(this.Player.transform.position)) {
             this.SetPlayerToDark();
+        } else {
+            this.SetPlayerToLight();
         }
     }
 
