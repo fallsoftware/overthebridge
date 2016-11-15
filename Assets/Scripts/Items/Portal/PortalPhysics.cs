@@ -132,10 +132,11 @@ public class PortalPhysics : MonoBehaviour {
 
         size = angles.Count;
 
-        float searchAngle = (angles[0] + angles[1] / 2) % 360;
+        float searchAngle = (((angles[0] + angles[1]) / 2) % 360) * Mathf.Deg2Rad;
+        float realradius = radius * Mathf.Max(gameObject.transform.parent.transform.localScale.x, gameObject.transform.parent.transform.localScale.y); ;
         Vector2 searchPoint = new Vector2(
-            Mathf.Cos(searchAngle) * radius + center.x,
-            Mathf.Sin(searchAngle) * radius + center.y);
+            Mathf.Cos(searchAngle) * realradius + center.x,
+            Mathf.Sin(searchAngle) * realradius + center.y);
         bool searchState = polygonCollider2D.OverlapPoint(searchPoint);
 
         for (int i = 0; i < size; i++) {
