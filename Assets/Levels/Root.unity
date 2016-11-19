@@ -366,7 +366,8 @@ MonoBehaviour:
   MaxRadius: 60
   MinRadius: 0
   PortalControllerSurface: {fileID: 1172514538}
-  Delay: 0.5
+  AxisControllerTweak: 50
+  AxisControllerMaxSpeed: 3.5
 --- !u!114 &386870446
 MonoBehaviour:
   m_ObjectHideFlags: 0
