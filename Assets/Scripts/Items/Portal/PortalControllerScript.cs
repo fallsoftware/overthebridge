@@ -9,12 +9,14 @@ public class PortalControllerScript : MonoBehaviour {
     public GameObject PortalControllerSurface;
     public float AxisControllerTweak = 50f;
     public float AxisControllerMaxSpeed = 30f;
+    public float TriggerTolerance = -0.2f;
 
     private GameObject _player;
     private Animator _animator;
     private PortalPhysics _portalPhysics;
     private bool _display = false;
     private Vector3 _oldPosition;
+    private bool _isTriggerUsed = false;
 
     void Start() {
         this._player = GameObject.FindGameObjectWithTag("Player");
@@ -29,13 +31,24 @@ public class PortalControllerScript : MonoBehaviour {
         this.displayPortalControllerSurface();
     }
 
+    private bool isTriggerPressed() {
+        if (Input.GetAxisRaw("SetPortal") < this.TriggerTolerance) {
+            if (!this._isTriggerUsed) this._isTriggerUsed = true;
+        } else {
+            this._isTriggerUsed = false;
+        }
+
+        return this._isTriggerUsed;
+        //return Mathf.Round(Input.GetAxisRaw("SetPortal")) < 0;
+    }
+
     private void handleStates() {
         AnimatorStateInfo animStateInfo 
             = this._animator.GetCurrentAnimatorStateInfo(0);
 
         if (animStateInfo.IsName("Set")) {
             if (Input.GetButtonDown("SetPortal")
-                || Mathf.Round(Input.GetAxisRaw("SetPortal")) < 0) {
+                || this.isTriggerPressed()) {
                 this.changeToBeingSetState();
             }
 
@@ -43,15 +56,15 @@ public class PortalControllerScript : MonoBehaviour {
                 this.changeToNotSetState();
             }
         } else if (animStateInfo.IsName("BeingSet")) {
-            if (Input.GetButtonUp("SetPortal")
-                || Mathf.Round(Input.GetAxisRaw("SetPortal")) == 0) {
+            if (!Input.GetButton("SetPortal")
+                && !this.isTriggerPressed()) {
                 this.changeToSetState();
             }
 
             this.handlePosition();
         } else if (animStateInfo.IsName("NotSet")) {
             if (Input.GetButtonDown("SetPortal")
-                || Mathf.Round(Input.GetAxisRaw("SetPortal")) < 0) {
+                || this.isTriggerPressed()) {
                 this.changeToBeingSetState();
             }
 
@@ -59,6 +72,11 @@ public class PortalControllerScript : MonoBehaviour {
                 this.changeToSetState();
             }
         }
+
+        Debug.Log("BUTTON = " + Input.GetButton("SetPortal"));
+        Debug.Log("AXIS = " + this.isTriggerPressed());
+        Debug.Log("TRIGGER = " + Input.GetAxisRaw("SetPortal"));
+        Debug.Log("TOL = " + this.TriggerTolerance);
     }
 
     private void changeToNotSetState() {
