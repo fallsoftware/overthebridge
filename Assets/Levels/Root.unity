@@ -368,6 +368,7 @@ MonoBehaviour:
   PortalControllerSurface: {fileID: 1172514538}
   AxisControllerTweak: 50
   AxisControllerMaxSpeed: 3.5
+  TriggerTolerance: 0.2
 --- !u!114 &386870446
 MonoBehaviour:
   m_ObjectHideFlags: 0

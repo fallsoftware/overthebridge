@@ -9,7 +9,7 @@ public class PortalControllerScript : MonoBehaviour {
     public GameObject PortalControllerSurface;
     public float AxisControllerTweak = 50f;
     public float AxisControllerMaxSpeed = 30f;
-    public float TriggerTolerance = -0.2f;
+    public float TriggerTolerance = 0.2f;
 
     private GameObject _player;
     private Animator _animator;
@@ -32,7 +32,7 @@ public class PortalControllerScript : MonoBehaviour {
     }
 
     private bool isTriggerPressed() {
-        if (Input.GetAxisRaw("SetPortal") < this.TriggerTolerance) {
+        if (Input.GetAxisRaw("SetPortal") > this.TriggerTolerance) {
             if (!this._isTriggerUsed) this._isTriggerUsed = true;
         } else {
             this._isTriggerUsed = false;
