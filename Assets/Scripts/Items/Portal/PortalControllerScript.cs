@@ -71,11 +71,6 @@ public class PortalControllerScript : MonoBehaviour {
                 this.changeToSetState();
             }
         }
-
-        Debug.Log("BUTTON = " + Input.GetButton("SetPortal"));
-        Debug.Log("AXIS = " + this.isTriggerPressed());
-        Debug.Log("TRIGGER = " + Input.GetAxisRaw("SetPortal"));
-        Debug.Log("TOL = " + this.TriggerTolerance);
     }
 
     private void changeToNotSetState() {
@@ -108,6 +103,12 @@ public class PortalControllerScript : MonoBehaviour {
              Input.GetAxis("RightV"));
     }
 
+    private Vector2 getCenterControllerAxis() {
+        return new Vector2(
+             Input.GetAxis("RightHCenter"),
+             Input.GetAxis("RightVCenter"));
+    }
+
     private bool isControllerMovement(Vector2 controllerAxis) {
         return controllerAxis.x != 0 || controllerAxis.y != 0;
     }
@@ -117,60 +118,68 @@ public class PortalControllerScript : MonoBehaviour {
     }
 
     private Vector3 clampAxisMovement(Vector3 axisMovement) {
-        float x = axisMovement.x;
-        float y = axisMovement.y;
-        float z = axisMovement.z;
-
-        x = Mathf.Sign(x) 
-            * Mathf.Min(Mathf.Abs(x), this.AxisControllerMaxSpeed);
-        y = Mathf.Sign(y)
-            * Mathf.Min(Mathf.Abs(y), this.AxisControllerMaxSpeed);
-        z = Mathf.Sign(z)
-            * Mathf.Min(Mathf.Abs(z), this.AxisControllerMaxSpeed);
-
-        return new Vector3(x, y, z);
+        float speed = axisMovement.magnitude;
+        speed = Mathf.Min(speed, this.AxisControllerMaxSpeed);
+        return axisMovement.normalized * speed;
     }
 
     private void handlePosition() {
-        Vector3 cursorPosition;
+        Vector3 mouvement;
         Vector3 playerPortal;
-        Vector2 controllerAxis = this.getControllerAxis();
+        Vector2 controllerAxis;
         Vector3 offset = this._player.transform.position;
 
-        // we check the controller first
-        if (this.isControllerMovement(controllerAxis)) {
-            cursorPosition = new Vector3(
-                controllerAxis.x, 
-                controllerAxis.y, 
-                0) * this.AxisControllerTweak;
-            cursorPosition = this.clampAxisMovement(cursorPosition);
-            playerPortal = this._oldPosition + cursorPosition;
-        } else if (this.isMouseMovement()) {
-            // then, we check the mouse
-            cursorPosition
-                = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            cursorPosition.z = 0;
-            playerPortal = cursorPosition - offset;
+
+        if (Input.GetButton("CenterPortal")) {
+            controllerAxis = this.getCenterControllerAxis();
         } else {
-            // default behavior when no mouvement is detected
-            playerPortal = this.transform.position - offset;
+            controllerAxis = this.getControllerAxis();
         }
 
+        // we check the controller first
+            if (this.isControllerMovement(controllerAxis)) {
+            if (Input.GetButton("CenterPortal")) {
+                mouvement = new Vector3(
+                    controllerAxis.x,
+                    controllerAxis.y,
+                    0) * this.MaxRadius;
+                playerPortal = mouvement;
+            } else {
+                mouvement = new Vector3(
+                    controllerAxis.x,
+                    controllerAxis.y,
+                    0) * this.AxisControllerTweak;
+                mouvement = this.clampAxisMovement(mouvement);
+                playerPortal = this._oldPosition + mouvement;
+            }
+        } else if (this.isMouseMovement()) {
+                // then, we check the mouse
+                mouvement
+                    = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                mouvement.z = 0;
+                playerPortal = mouvement - offset;
+        } else {
+            // default behavior when no mouvement is detected
+            if (Input.GetButton("CenterPortal")) {
+                playerPortal = Vector3.zero;
+            } else {
+                playerPortal = this.transform.position - offset;
+            }
+        }
 
+        playerPortal = this.clampPortalPosition(playerPortal);
         this._oldPosition = playerPortal;
-        this.transform.position 
-            = this.clampPortalPosition(playerPortal, offset);
+        this.transform.position = playerPortal + offset;
     }
 
-    private Vector3 clampPortalPosition(Vector3 portalPosition, 
-        Vector3 offset) {
+    private Vector3 clampPortalPosition(Vector3 portalPosition) {
         float distance = portalPosition.magnitude;
         distance = Mathf.Clamp(distance,
             this.MinRadius,
             this.MaxRadius);
         portalPosition = portalPosition.normalized * distance;
 
-        return offset + portalPosition;
+        return portalPosition;
     }
 
     private void displayPortalControllerSurface() {
