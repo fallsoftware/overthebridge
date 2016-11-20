@@ -39,7 +39,6 @@ public class PortalControllerScript : MonoBehaviour {
         }
 
         return this._isTriggerUsed;
-        //return Mathf.Round(Input.GetAxisRaw("SetPortal")) < 0;
     }
 
     private void handleStates() {
@@ -136,8 +135,7 @@ public class PortalControllerScript : MonoBehaviour {
         Vector3 cursorPosition;
         Vector3 playerPortal;
         Vector2 controllerAxis = this.getControllerAxis();
-        Vector3 playerPosition = this._player.transform.position;
-        Vector3 offset = Vector3.zero;
+        Vector3 offset = this._player.transform.position;
 
         // we check the controller first
         if (this.isControllerMovement(controllerAxis)) {
@@ -147,18 +145,15 @@ public class PortalControllerScript : MonoBehaviour {
                 0) * this.AxisControllerTweak;
             cursorPosition = this.clampAxisMovement(cursorPosition);
             playerPortal = this._oldPosition + cursorPosition;
-            offset = playerPosition;
         } else if (this.isMouseMovement()) {
             // then, we check the mouse
             cursorPosition
                 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             cursorPosition.z = 0;
-            playerPortal = cursorPosition - playerPosition;
-            offset = playerPosition;
+            playerPortal = cursorPosition - offset;
         } else {
             // default behavior when no mouvement is detected
-            playerPortal = this.transform.position - playerPosition;
-            offset = playerPosition;
+            playerPortal = this.transform.position - offset;
         }
 
 
