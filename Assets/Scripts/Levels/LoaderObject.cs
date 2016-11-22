@@ -1,21 +1,23 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using UnityEditor;
 using UnityEngine.SceneManagement;
 
 public class LoaderObject : MonoBehaviour {
     public LevelLoader LevelLoader;
     [HideInInspector] public bool FromRight = false;
-    private string levelToUnload = null;
+    private string _levelToUnload = null;
 
     void Start() {
     }
 
     void Update() {
-        if (this.levelToUnload != null) {
+        if (!String.IsNullOrEmpty(this._levelToUnload)) {
             // should check if any physics interactions before...
-            SceneManager.UnloadScene(this.levelToUnload);
-            this.levelToUnload = null;
+            LevelController.StaticRef.UnloadLevel(this._levelToUnload);
+
+            this._levelToUnload = null;
         }
     }
 
@@ -50,11 +52,11 @@ public class LoaderObject : MonoBehaviour {
         if (!SceneManager.GetSceneByName(level).isLoaded) return;
 
         Destroy(LevelLoader.FindRoot(SceneManager.GetSceneByName(level)));
-        this.levelToUnload = level;
+        this._levelToUnload = level;
     }
 
     private void addLevel(string level) {
-        LevelController.StaticRef.LoadLevel(this, level);
+        LevelController.StaticRef.LoadLevel(level);
     }
 
     private string getLevelBeforePreviousLevel(Scene level) {

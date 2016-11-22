@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour {
     public string PreviousLevel;
     public string NextLevel;
+    [HideInInspector] public string Level;
 
     [HideInInspector] public bool IsNext;
 
@@ -14,6 +16,7 @@ public class LevelLoader : MonoBehaviour {
 
     void Start() {
         this.SetLevelPositionAtLoading();
+        this.Level = this.gameObject.scene.name;
         LevelController.StaticRef.SetupLevel(this);
     }
 

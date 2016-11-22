@@ -2,19 +2,19 @@
 using System.Collections;
 
 public class DeathManager : MonoBehaviour {
-    public LevelManager levelManager;
+    public LevelManager LevelManager;
 
     void Start() {
-        if (levelManager == null) return;
+        if (LevelManager == null) return;
     }
 
     void Update() {
-        if (levelManager == null) return;
+        if (LevelManager == null) return;
     }
 
     public void OnTriggerEnter2D(Collider2D collider2D) {
         if (collider2D.tag != "Player") return;
 
-        this.levelManager.SetPlayerToLastCheckpoint();
+        this.LevelManager.OopsPlayerIsDead();
     }
 }

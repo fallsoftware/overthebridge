@@ -2491,6 +2491,11 @@ Prefab:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013714379626, guid: f107286081e882340856348a57a2bb5b,
+        type: 2}
+      propertyPath: LevelManager
+      value: 
+      objectReference: {fileID: 1571149302}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f107286081e882340856348a57a2bb5b, type: 2}
   m_IsPrefabParent: 0

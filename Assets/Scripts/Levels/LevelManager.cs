@@ -5,11 +5,22 @@ public class LevelManager : MonoBehaviour {
     public Checkpoint LastCheckpoint;
     [HideInInspector] public bool SetToCheckpointAtStart = false;
     [HideInInspector] public GameObject player;
+    [HideInInspector] private GameManager _gameManager;
 
-	void Start () {	    
-	    this.player = GameObject.FindGameObjectWithTag("Player");
+    void Awake() {
+        this.player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+	void Start () {
+	    if (this.player == null) {
+	        this.player = GameObject.FindGameObjectWithTag("Player");
+	    }
+
+	    this._gameManager = GameObject.FindObjectOfType<GameManager>();
 
         if (this.SetToCheckpointAtStart) {
+            this._gameManager.LevelManager = this;
+            this.SetToCheckpointAtStart = false;
             this.SetPlayerToLastCheckpoint();
         }
     }
@@ -29,6 +40,11 @@ public class LevelManager : MonoBehaviour {
     }
 
     public void UpdateCheckpoint(Checkpoint checkpoint) {
+        this._gameManager.LevelManager = this;
         this.LastCheckpoint = checkpoint;
+    }
+
+    public void OopsPlayerIsDead() {
+        StartCoroutine(this._gameManager.GameOver());
     }
 }

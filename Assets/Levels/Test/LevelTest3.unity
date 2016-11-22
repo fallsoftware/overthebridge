@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LastCheckpoint: {fileID: 926349757}
-  setToCheckpointAtStart: 0
+  SetToCheckpointAtStart: 0
   player: {fileID: 0}
 --- !u!1 &337242237
 GameObject:
@@ -359,6 +359,11 @@ Prefab:
     - target: {fileID: 114000013714379626, guid: f107286081e882340856348a57a2bb5b,
         type: 2}
       propertyPath: levelManager
+      value: 
+      objectReference: {fileID: 29690424}
+    - target: {fileID: 114000013714379626, guid: f107286081e882340856348a57a2bb5b,
+        type: 2}
+      propertyPath: LevelManager
       value: 
       objectReference: {fileID: 29690424}
     m_RemovedComponents: []
