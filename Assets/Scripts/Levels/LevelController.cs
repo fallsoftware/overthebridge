@@ -12,9 +12,7 @@ public class LevelController : MonoBehaviour {
     public static LevelController StaticRef;
 
     private bool _toSetup = false;
-    private bool _firstLoad = false;
-    private bool _unloadAll = false;
-    private bool _loadAll = false;
+    private bool _placeToCheckpoint = false;
     private string _toLoadNext = null;
     private string _sceneToPlacePlayer = null;
 
@@ -24,41 +22,28 @@ public class LevelController : MonoBehaviour {
     }
 	
 	void Update() {
-        if (this._loadAll) {
-            this.loadAllLevels();
-        }
-
-        if (this._unloadAll) {
-	        this.unloadAllLevels();
-	        this._unloadAll = false;
-	    }
     }
 
-    public void LoadLevel(string levelNameToLoad, bool firstLoad = false) {
+    public void LoadLevel(string levelNameToLoad, bool setup = true, 
+        bool placeToCheckpoint = false) {
         Scene levelToLoad = SceneManager.GetSceneByName(levelNameToLoad);
-        //this.LevelsLoaded.Add(levelNameToLoad);
 
         if (levelToLoad.isLoaded) return;
     
         SceneManager.LoadScene(levelNameToLoad, LoadSceneMode.Additive);
 
-        this._toSetup = true;
-        this._firstLoad = firstLoad;
+        this._toSetup = setup;
+        this._placeToCheckpoint = placeToCheckpoint;
     }
 
     public void LoadFirstLevel(string levelNameToLoad, 
-        bool toCheckpoint = true) {
-        Scene levelToLoad = SceneManager.GetSceneByName(levelNameToLoad);
-
-        if (levelToLoad.isLoaded) return;
-
-        SceneManager.LoadScene(levelNameToLoad, LoadSceneMode.Additive);
+        bool placeToCheckpoint = true) {
+        this.LoadLevel(levelNameToLoad, false, placeToCheckpoint);
 
         if (!this.LevelsLoaded.Contains(levelNameToLoad)) {
             this.LevelsLoaded.Add(levelNameToLoad);
         }
-
-        this._firstLoad = toCheckpoint;
+        
     }
 
     public void UnloadLevel(string levelNameToUnload) {
@@ -72,8 +57,6 @@ public class LevelController : MonoBehaviour {
         for (int i = 0; i < levelsLoadedNumber; i++) {
             SceneManager.UnloadScene(this.LevelsLoaded[i]);
         }
-
-        this._loadAll = true;
     }
 
     private void loadAllLevels() {
@@ -81,8 +64,11 @@ public class LevelController : MonoBehaviour {
 
         if (levelsLoadedNumber <= 0) return;
 
-        this.LoadFirstLevel(this.LevelsLoaded[0], levelsLoadedNumber == 1); // TO FIX YOU FUCK like you have to know which and when
         this._toLoadNext = this.LevelsLoaded[0];
+
+        this.LoadFirstLevel(
+            this.LevelsLoaded[0], 
+            this.LevelsLoaded[0] == this._sceneToPlacePlayer);
     }
 
     public void ReloadLevels(string sceneToPlacePlayer = null) {
@@ -93,8 +79,9 @@ public class LevelController : MonoBehaviour {
                 (SceneManager.GetSceneByName(this.LevelsLoaded[i])));
         }
 
-        this._unloadAll = true;
         this._sceneToPlacePlayer = sceneToPlacePlayer;
+        this.unloadAllLevels();
+        this.loadAllLevels();
     }
 
     public void SetupLevel(LevelLoader levelLoader) {
@@ -112,41 +99,46 @@ public class LevelController : MonoBehaviour {
             this._toSetup = false;
         }
 
-        if (this._firstLoad) {
-            this.firstLoadSetup(levelLoader);
+        if (this._placeToCheckpoint) {
+            this.placeToCheckpoint(levelLoader);
         }
 
-        if (!this.LevelsLoaded.Contains(levelLoader.Level) 
-            && !String.IsNullOrEmpty(levelLoader.Level)) {
-            int indexToInsert = 0;
+        this.addLevelToList(levelLoader);
+        this.loadNextLevel();
+    }
 
+    private void addLevelToList(LevelLoader levelLoader) {
+        if (!this.LevelsLoaded.Contains(levelLoader.Level)
+            && !String.IsNullOrEmpty(levelLoader.Level)) {
             if (levelLoader.IsNext) {
                 this.LevelsLoaded.Add(levelLoader.Level);
             } else {
-                indexToInsert = this.LevelsLoaded.IndexOf(levelLoader.NextLevel);
+                int indexToInsert 
+                    = this.LevelsLoaded.IndexOf(levelLoader.NextLevel);
                 this.LevelsLoaded.Insert(indexToInsert, levelLoader.Level);
-            }
-        }
-
-        if (this._loadAll) {
-            if (!String.IsNullOrEmpty(this._toLoadNext)) {
-                int next = this.LevelsLoaded.IndexOf(this._toLoadNext);
-
-                if (next > this.LevelsLoaded.Count-1 || next < 0 || this.LevelsLoaded.Count == 1) {
-                    this._toLoadNext = null;
-                    this._loadAll = false;
-                    this._sceneToPlacePlayer = null;
-                } else {
-                    this._toLoadNext = this.LevelsLoaded[next + 1];
-                    this.LoadLevel(this._toLoadNext, 
-                        this._toLoadNext == this._sceneToPlacePlayer);
-                }
-
             }
         }
     }
 
-    private void firstLoadSetup(LevelLoader levelLoader) {
+    private void loadNextLevel() {
+        if (!String.IsNullOrEmpty(this._toLoadNext)) {
+            int next = this.LevelsLoaded.IndexOf(this._toLoadNext);
+
+            if (next >= this.LevelsLoaded.Count - 1 
+                || next < 0 
+                || this.LevelsLoaded.Count == 1) {
+                this._toLoadNext = null;
+                this._sceneToPlacePlayer = null;
+            } else {
+                this._toLoadNext = this.LevelsLoaded[next + 1];
+                this.LoadLevel(this._toLoadNext, true,
+                    this._toLoadNext == this._sceneToPlacePlayer);
+            }
+
+        }
+    }
+
+    private void placeToCheckpoint(LevelLoader levelLoader) {
         GameObject root = LevelLoader.FindRoot(levelLoader.gameObject.scene);
         LevelManager levelManager = root.GetComponent<LevelManager>();
         levelManager.SetPlayerToLastCheckpoint();
