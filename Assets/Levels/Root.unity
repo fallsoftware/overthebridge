@@ -1283,8 +1283,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b40662be68df645479d70583c72e6a7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FirstLevelToLoad: LevelTest1
-  LevelsLoaded: 
+  FirstLevelToLoad: Level1
+  LevelsLoaded: []
 --- !u!4 &2111837773
 Transform:
   m_ObjectHideFlags: 0
@@ -1309,6 +1309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c7e0b01845382a48ad9bf44e25ffff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelManager: {fileID: 0}
 --- !u!114 &2111837775
 MonoBehaviour:
   m_ObjectHideFlags: 0

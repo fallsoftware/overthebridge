@@ -34,8 +34,4 @@ public class LevelFading : MonoBehaviour {
 
         return (this.FadingSpeed);
     }
-
-    void OnLevelFinishedLoading() {
-        this.BeginFade(-1);
-    }
 }
