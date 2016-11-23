@@ -158,10 +158,7 @@ public class PortalControllerScript : MonoBehaviour {
             this._controllerMode = true;
         } else if (this.isMouseMovement()) {
             // then, we check the mouse
-            mouvement
-                = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mouvement.z = 0;
-            playerPortal = mouvement - offset;
+            playerPortal = this.getMouseMovement(offset);
             this._controllerMode = false;
         } else {
             // default behavior when no mouvement is detected
@@ -171,10 +168,7 @@ public class PortalControllerScript : MonoBehaviour {
                 if (this._controllerMode) {
                     playerPortal = this.transform.position - offset;
                 } else {
-                    mouvement
-                        = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                    mouvement.z = 0;
-                    playerPortal = mouvement - offset;
+                    playerPortal = this.getMouseMovement(offset);
                 }
             }
         }
@@ -182,6 +176,13 @@ public class PortalControllerScript : MonoBehaviour {
         playerPortal = this.clampPortalPosition(playerPortal);
         this._oldPosition = playerPortal;
         this.transform.position = playerPortal + offset;
+    }
+
+    private Vector3 getMouseMovement(Vector3 offset) {
+        Vector3 mouvement
+            = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mouvement.z = 0;
+        return mouvement - offset;
     }
 
     private Vector3 clampPortalPosition(Vector3 portalPosition) {
