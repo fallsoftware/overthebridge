@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour {
     public IEnumerator GameOver() {
         float fadeTime = this._levelFading.BeginFade(1);
         yield return new WaitForSeconds(fadeTime);
-        LevelController.StaticRef.ReloadLevels(this.LevelManager.gameObject.scene.name);
+        LevelController.StaticRef.ReloadLevels(this.LevelManager);
         fadeTime = this._levelFading.BeginFade(-1);
         yield return new WaitForSeconds(fadeTime);
     }

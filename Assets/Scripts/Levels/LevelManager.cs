@@ -44,6 +44,10 @@ public class LevelManager : MonoBehaviour {
         this.LastCheckpoint = checkpoint;
     }
 
+    public void SetPlayerToLocation(Vector2 location) {
+        this.player.transform.position = location;
+    }
+
     public void OopsPlayerIsDead() {
         StartCoroutine(this._gameManager.GameOver());
     }

@@ -15,8 +15,11 @@ public class LevelController : MonoBehaviour {
     private bool _placeToCheckpoint = false;
     private string _toLoadNext = null;
     private string _sceneToPlacePlayer = null;
+    private Vector2 _locationToPlacePlayer;
+    private bool _isLocation = false;
 
-	void Start() {
+
+    void Start() {
 	    LevelController.StaticRef = this;
         this.LoadFirstLevel(this.FirstLevelToLoad);
     }
@@ -68,10 +71,11 @@ public class LevelController : MonoBehaviour {
 
         this.LoadFirstLevel(
             this.LevelsLoaded[0], 
-            this.LevelsLoaded[0] == this._sceneToPlacePlayer);
+            this.LevelsLoaded[0] 
+                == this._sceneToPlacePlayer);
     }
 
-    public void ReloadLevels(string sceneToPlacePlayer = null) {
+    public void ReloadLevels(LevelManager levelManager = null) {
         int levelsLoadedNumber = this.LevelsLoaded.Count;
 
         for (int i = 0; i < levelsLoadedNumber; i++) {
@@ -79,7 +83,13 @@ public class LevelController : MonoBehaviour {
                 (SceneManager.GetSceneByName(this.LevelsLoaded[i])));
         }
 
-        this._sceneToPlacePlayer = sceneToPlacePlayer;
+        if (levelManager != null) {
+            this._sceneToPlacePlayer = levelManager.gameObject.scene.name;
+            this._locationToPlacePlayer 
+                = levelManager.LastCheckpoint.transform.position;
+            this._isLocation = true;
+        }
+
         this.unloadAllLevels();
         this.loadAllLevels();
     }
@@ -129,10 +139,12 @@ public class LevelController : MonoBehaviour {
                 || this.LevelsLoaded.Count == 1) {
                 this._toLoadNext = null;
                 this._sceneToPlacePlayer = null;
+                this._isLocation = false;
             } else {
                 this._toLoadNext = this.LevelsLoaded[next + 1];
                 this.LoadLevel(this._toLoadNext, true,
-                    this._toLoadNext == this._sceneToPlacePlayer);
+                    this._toLoadNext 
+                        == this._sceneToPlacePlayer);
             }
 
         }
@@ -141,6 +153,11 @@ public class LevelController : MonoBehaviour {
     private void placeToCheckpoint(LevelLoader levelLoader) {
         GameObject root = LevelLoader.FindRoot(levelLoader.gameObject.scene);
         LevelManager levelManager = root.GetComponent<LevelManager>();
-        levelManager.SetPlayerToLastCheckpoint();
+
+        if (!this._isLocation) {
+            levelManager.SetPlayerToLastCheckpoint();
+        } else {
+            levelManager.SetPlayerToLocation(this._locationToPlacePlayer);
+        }
     }
 }

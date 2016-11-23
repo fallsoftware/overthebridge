@@ -10,17 +10,17 @@ public class FadeDistance : MonoBehaviour {
     private Color _color;
     private float _alpha;
     private Transform _player;
+    private Bounds _bounds;
 
-	// Use this for initialization
 	void Start () {
 	    this._player 
             = GameObject.FindGameObjectWithTag("Player")
             .GetComponent<Transform>();
 	    this._textMesh = this.GetComponent<TextMesh>();
 	    this._color = this._textMesh.color;
+	    this._bounds = this.GetComponent<Renderer>().bounds;
 	}
 	
-	// Update is called once per frame
 	void Update () {
         this.setAlpha();
 	    this._textMesh.color = new Color(this._color.r, this._color.g, 
