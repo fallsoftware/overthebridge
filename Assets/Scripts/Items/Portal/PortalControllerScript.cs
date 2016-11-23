@@ -18,6 +18,7 @@ public class PortalControllerScript : MonoBehaviour {
     private bool _display = false;
     private Vector3 _oldPosition;
     private bool _isTriggerUsed = false;
+    private bool _controllerMode = false;
 
     void Start() {
         this._player = GameObject.FindGameObjectWithTag("Player");
@@ -138,7 +139,7 @@ public class PortalControllerScript : MonoBehaviour {
         }
 
         // we check the controller first
-            if (this.isControllerMovement(controllerAxis)) {
+        if (this.isControllerMovement(controllerAxis)) {
             if (Input.GetButton("CenterPortal")) {
                 mouvement = new Vector3(
                     controllerAxis.x,
@@ -153,18 +154,28 @@ public class PortalControllerScript : MonoBehaviour {
                 mouvement = this.clampAxisMovement(mouvement);
                 playerPortal = this._oldPosition + mouvement;
             }
+
+            this._controllerMode = true;
         } else if (this.isMouseMovement()) {
-                // then, we check the mouse
-                mouvement
-                    = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                mouvement.z = 0;
-                playerPortal = mouvement - offset;
+            // then, we check the mouse
+            mouvement
+                = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mouvement.z = 0;
+            playerPortal = mouvement - offset;
+            this._controllerMode = false;
         } else {
             // default behavior when no mouvement is detected
             if (Input.GetButton("CenterPortal")) {
                 playerPortal = Vector3.zero;
             } else {
-                playerPortal = this.transform.position - offset;
+                if (this._controllerMode) {
+                    playerPortal = this.transform.position - offset;
+                } else {
+                    mouvement
+                        = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    mouvement.z = 0;
+                    playerPortal = mouvement - offset;
+                }
             }
         }
 
