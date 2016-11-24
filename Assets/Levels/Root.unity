@@ -505,6 +505,7 @@ MonoBehaviour:
   AxisControllerTweak: 50
   AxisControllerMaxSpeed: 3.5
   TriggerTolerance: 0.2
+  MenuManager: {fileID: 651348460}
 --- !u!114 &386870446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1162,6 +1163,11 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 0.8
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013480693950, guid: 69733e0474d78bf4ca0832e9d1b9c733,
+        type: 2}
+      propertyPath: MenuManager
+      value: 
+      objectReference: {fileID: 651348460}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 69733e0474d78bf4ca0832e9d1b9c733, type: 2}
   m_IsPrefabParent: 0

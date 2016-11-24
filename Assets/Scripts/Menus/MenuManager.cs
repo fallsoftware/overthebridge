@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour {
     public string RootScene;
     public GameObject PauseMenu;
+    public bool IsPause = false;
 
     void Start () {
 	
@@ -26,16 +27,14 @@ public class MenuManager : MonoBehaviour {
     }
 
     public void LaunchPause() {
-        if (this.PauseMenu == null) return;
+        this.IsPause = !this.IsPause;
 
-        bool isPause = this.PauseMenu.activeSelf;
-
-        if (isPause) {
-            Time.timeScale = 1f;
-        } else {
+        if (this.IsPause) {
             Time.timeScale = 0f;
+        } else {
+            Time.timeScale = 1f;
         }
 
-        this.PauseMenu.SetActive(!isPause);
+        this.PauseMenu.SetActive(this.IsPause);
     }
 }

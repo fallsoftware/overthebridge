@@ -11,6 +11,7 @@ public class PortalControllerScript : MonoBehaviour {
     public float AxisControllerTweak = 50f;
     public float AxisControllerMaxSpeed = 30f;
     public float TriggerTolerance = 0.2f;
+    public MenuManager MenuManager;
 
     private GameObject _player;
     private Animator _animator;
@@ -29,6 +30,8 @@ public class PortalControllerScript : MonoBehaviour {
     }
 
     void Update() {
+        if (this.MenuManager.IsPause) return;
+
         this.handleStates();
         this.displayPortalControllerSurface();
     }

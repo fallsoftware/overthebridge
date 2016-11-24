@@ -6,6 +6,7 @@ public class PlayerControllerScript : MonoBehaviour {
     public Transform GroundCheck;
     public LayerMask WhatIsGround;
     public float JumpForce = 7000f;
+    public MenuManager MenuManager;
 
     private bool _facingRight = true;
     private Animator _animator;
@@ -18,7 +19,9 @@ public class PlayerControllerScript : MonoBehaviour {
 	}
 	
 	void Update() {
-	    if ((!this._grounded && this._doubleJump) 
+        if (this.MenuManager.IsPause) return;
+
+        if ((!this._grounded && this._doubleJump) 
             || !Input.GetButtonDown("Jump")) return;
 
 	    this._animator.SetBool("Ground", false);
