@@ -46,8 +46,8 @@ public class ArcCollider2D : MonoBehaviour {
     [Range(0, 360)]
     public int offsetRotation = 0;
 
-    [Header("Let there be Pizza")]
-    public bool pizzaSlice;
+    public float offsetDouble=0.0f;
+
     
     Vector2 origin, center;
     
@@ -60,8 +60,6 @@ public class ArcCollider2D : MonoBehaviour {
         
         float ang = offsetRotation;
 
-        if (pizzaSlice && totalAngle % 360 != 0) points.Add(center);
-
         for (int i = 0; i <= smoothness; i++)
         {
             float x = center.x + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
@@ -70,9 +68,20 @@ public class ArcCollider2D : MonoBehaviour {
             points.Add(new Vector2(x, y));
             ang += (float)totalAngle/smoothness;
         }
+        if (offsetDouble != 0.0f)
+        {
+            float newOffset = (radius + offsetDouble);
+            for (int i = 0; i <= smoothness; i++)
+            {
+                ang -= (float)totalAngle / smoothness;
+                float x = center.x + newOffset * Mathf.Cos(ang * Mathf.Deg2Rad);
+                float y = center.y + newOffset * Mathf.Sin(ang * Mathf.Deg2Rad);
 
-        if (pizzaSlice && totalAngle % 360 != 0) points.Add(center);
-
+                points.Add(new Vector2(x, y));
+                
+            }
+            points.Add(new Vector2(center.x + radius * Mathf.Cos(ang * Mathf.Deg2Rad), center.y + radius * Mathf.Sin(ang * Mathf.Deg2Rad)));
+        }
         return points.ToArray();
     }
 }

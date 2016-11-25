@@ -112,7 +112,8 @@ public class PortalPhysics : MonoBehaviour {
     }
 
     private void createArcColliders2D(List<Vector2> intersectionPoints,
-        PolygonCollider2D polygonCollider2D) {
+        PolygonCollider2D polygonCollider2D)
+    {
         List<float> angles = new List<float>();
         int size = intersectionPoints.Count;
         CircleCollider2D circle = this.GetComponent<CircleCollider2D>();
@@ -122,7 +123,8 @@ public class PortalPhysics : MonoBehaviour {
         float radius = circle.radius;
         Vector2 point;
 
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++)
+        {
             point = intersectionPoints[i];
             angles.Add(((Mathf.Atan2(point.y - center.y, point.x - center.x)
                 * Mathf.Rad2Deg) + 360) % 360);
@@ -131,43 +133,65 @@ public class PortalPhysics : MonoBehaviour {
         angles.Sort();
 
         size = angles.Count;
+        if (size != 0) {
+            float searchAngle = (((angles[0] + angles[1]) / 2) % 360) * Mathf.Deg2Rad;
+            float realradius = radius * Mathf.Max(gameObject.transform.parent.transform.localScale.x, gameObject.transform.parent.transform.localScale.y); ;
+            Vector2 searchPoint = new Vector2(
+                Mathf.Cos(searchAngle) * realradius + center.x,
+                Mathf.Sin(searchAngle) * realradius + center.y);
+            bool searchState = polygonCollider2D.OverlapPoint(searchPoint);
 
-        float searchAngle = (((angles[0] + angles[1]) / 2) % 360) * Mathf.Deg2Rad;
-        float realradius = radius * Mathf.Max(gameObject.transform.parent.transform.localScale.x, gameObject.transform.parent.transform.localScale.y); ;
-        Vector2 searchPoint = new Vector2(
-            Mathf.Cos(searchAngle) * realradius + center.x,
-            Mathf.Sin(searchAngle) * realradius + center.y);
-        bool searchState = polygonCollider2D.OverlapPoint(searchPoint);
+            for (int i = 0; i < size; i++)
+            {
+                if (searchState)
+                {
+                    GameObject newObjectCollider = new GameObject();
+                    newObjectCollider.transform.parent = this.gameObject.transform;
+                    newObjectCollider.name = this.ColliderName;
+                    newObjectCollider.tag = this.ColliderName;
+                    newObjectCollider.transform.localScale = new Vector3(1, 1, 1);
+                    ArcCollider2D newArc
+                        = newObjectCollider.AddComponent<ArcCollider2D>();
+                    newArc.offsetRotation = (int)Mathf.Round(angles[i]);
+                    newArc.radius = radius;
 
-        for (int i = 0; i < size; i++) {
-            if (searchState) {
-                GameObject newObjectCollider = new GameObject();
-                newObjectCollider.transform.parent = this.gameObject.transform;
-                newObjectCollider.name = this.ColliderName;
-                newObjectCollider.tag = this.ColliderName;
-                newObjectCollider.transform.localScale = new Vector3(1, 1, 1);
-                ArcCollider2D newArc
-                    = newObjectCollider.AddComponent<ArcCollider2D>();
-                newArc.offsetRotation = (int)Mathf.Round(angles[i]);
-                newArc.radius = radius;
-
-                if (i == size - 1) {
-                    newArc.totalAngle = (int)Mathf.Round(
-                        angles[0] + 360 - angles[size - 1]);
-                } else {
-                    newArc.totalAngle = (int)Mathf.Round(
-                    angles[i + 1] - angles[i]);
+                    if (i == size - 1)
+                    {
+                        newArc.totalAngle = (int)Mathf.Round(
+                            angles[0] + 360 - angles[size - 1]);
+                    }
+                    else
+                    {
+                        newArc.totalAngle = (int)Mathf.Round(
+                        angles[i + 1] - angles[i]);
+                    }
+                    newArc.offsetDouble = 0.01f;
+                    searchState = false;
+                    newObjectCollider.transform.localPosition = Vector3.zero;
+                    newArc.GetComponent<EdgeCollider2D>().offset = Vector2.zero;
                 }
-
-
-                newArc.pizzaSlice = false;
-                searchState = false;
-                newObjectCollider.transform.localPosition = Vector3.zero;
-                newArc.GetComponent<EdgeCollider2D>().offset = Vector2.zero;
-            } else {
-                searchState = true;
+                else
+                {
+                    searchState = true;
+                }
             }
         }
+        else
+        {
+            GameObject newObjectCollider = new GameObject();
+            newObjectCollider.transform.parent = this.gameObject.transform;
+            newObjectCollider.name = this.ColliderName;
+            newObjectCollider.tag = this.ColliderName;
+            newObjectCollider.transform.localScale = new Vector3(1, 1, 1);
+            ArcCollider2D newArc= newObjectCollider.AddComponent<ArcCollider2D>();
+            newArc.offsetRotation = 0;
+            newArc.radius = radius;
+            newArc.offsetDouble = 0.01f;
+            newArc.totalAngle =360 ;
+            newObjectCollider.transform.localPosition = Vector3.zero;
+            newArc.GetComponent<EdgeCollider2D>().offset = Vector2.zero;
+        }
+
     }
 
     public void DestroyColliders() {
