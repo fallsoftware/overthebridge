@@ -14,6 +14,13 @@ public class PlayerFix : MonoBehaviour {
 	}
 
     void OnCollisionEnter2D(Collision2D c) {
-        int a = 0;
+
+        if((c.collider is EdgeCollider2D)&& c.collider.gameObject.name=="Portal Collider")
+        {
+            if (((EdgeCollider2D) c.collider).points[0].ToString() == "(-0.5, 0.0)" && ((EdgeCollider2D) c.collider).points[1].ToString() == "(0.5, 0.0)") {
+                Destroy(c.collider);
+            }
+        }
+
     }
 }

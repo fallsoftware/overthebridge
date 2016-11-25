@@ -32,7 +32,7 @@ using System.Collections.Generic;
 
 [AddComponentMenu("Physics 2D/Arc Collider 2D")]
 
-[RequireComponent(typeof(EdgeCollider2D))]
+//[RequireComponent(typeof(EdgeCollider2D))]
 public class ArcCollider2D : MonoBehaviour {
 
     [Range(1, 25)]

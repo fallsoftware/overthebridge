@@ -131,7 +131,6 @@ public class PortalPhysics : MonoBehaviour {
 
         }
         angles.Sort();
-
         size = angles.Count;
         if (size != 0) {
             float searchAngle = (((angles[0] + angles[1]) / 2) % 360) * Mathf.Deg2Rad;
@@ -154,7 +153,6 @@ public class PortalPhysics : MonoBehaviour {
                         = newObjectCollider.AddComponent<ArcCollider2D>();
                     newArc.offsetRotation = (int)Mathf.Round(angles[i]);
                     newArc.radius = radius;
-
                     if (i == size - 1)
                     {
                         newArc.totalAngle = (int)Mathf.Round(
@@ -168,7 +166,6 @@ public class PortalPhysics : MonoBehaviour {
                     newArc.offsetDouble = 0.01f;
                     searchState = false;
                     newObjectCollider.transform.localPosition = Vector3.zero;
-                    newArc.GetComponent<EdgeCollider2D>().offset = Vector2.zero;
                 }
                 else
                 {
@@ -189,7 +186,6 @@ public class PortalPhysics : MonoBehaviour {
             newArc.offsetDouble = 0.01f;
             newArc.totalAngle =360 ;
             newObjectCollider.transform.localPosition = Vector3.zero;
-            newArc.GetComponent<EdgeCollider2D>().offset = Vector2.zero;
         }
 
     }
