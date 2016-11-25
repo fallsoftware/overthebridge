@@ -60,7 +60,7 @@ public class LightWell : MonoBehaviour {
                 hits[j] = Physics2D.RaycastAll(currentPosition, direction, maxdistance);
                 currentPosition += delta;
             }
-            Debug.logger.Log(hits.Length);
+
             int i = 0;
             foreach (RaycastHit2D[] hitarray in hits)
             {
@@ -80,7 +80,7 @@ public class LightWell : MonoBehaviour {
                             if (otherObject.CompareTag("Player"))
                             {
                                 otherObject.GetComponent<Rigidbody2D>().velocity = direction * PlayerSpeed;
-                                Debug.logger.Log(otherObject.GetComponent<Rigidbody2D>().velocity);
+
                             }
                             else if (otherObject.layer == LayerMask.NameToLayer("Dark") && otherObject.CompareTag("Ground"))
                             {
@@ -111,8 +111,6 @@ public class LightWell : MonoBehaviour {
 
                                 if ((tempDark != null && tempDark.OverlapPoint(hit.point)) || (tempLight != null && tempLight.OverlapPoint(hit.point)))
                                 {
-                                    Debug.logger.Log(tempDark);
-
                                     hasObstacle = true;
                                 }
                             }
