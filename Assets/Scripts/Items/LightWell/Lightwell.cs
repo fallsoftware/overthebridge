@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class lightwell : MonoBehaviour {
-
+public class LightWell : MonoBehaviour {
+    public Vector2 Offset = new Vector2(0, -8);
     public bool activated = true;
     public float maxdistance = 100;
     public Collider2D portalCollider;
     public int PlayerSpeed = 10;
     [Range(1, 10)]
-    public int RayNumber = 1;
+    public int RayNumber = 6;
     [Range(1, 5)]
-    public float width = 1;
-    public float Angle { get { return this.transform.rotation.eulerAngles.z * Mathf.Deg2Rad; } }
+    public float width = 3;
+    public float Angle { get { return (this.transform.rotation.eulerAngles.z + 90) * Mathf.Deg2Rad; } }
     private LineRenderer[] line;
     public Material material;
 	// Use this for initialization
@@ -21,6 +21,7 @@ public class lightwell : MonoBehaviour {
         for (int i = 0; i < RayNumber; i++)
         {
             GameObject newgameobject = new GameObject();
+            newgameobject.name = "LightBeam";
             newgameobject.transform.parent = this.transform;
             line[i] = newgameobject.AddComponent<LineRenderer>();
             line[i].SetVertexCount(2);
@@ -47,6 +48,7 @@ public class lightwell : MonoBehaviour {
             RaycastHit2D[][] hits = new RaycastHit2D[RayNumber][];
             Vector2 delta = new Vector2(Mathf.Sin(Angle) * (width / (RayNumber - 1)),Mathf.Cos(Angle) * (width / (RayNumber - 1)));
             Vector2 currentPosition = this.transform.position;
+            currentPosition += this.Offset;
             Vector2[] positions = new Vector2[RayNumber];
             if (RayNumber != 1) {
                 currentPosition -= new Vector2(Mathf.Sin(Angle) * (width / 2), Mathf.Cos(Angle) * (width / 2));

@@ -26,7 +26,7 @@ TagManager:
   - Dark
   - Light
   - Portal
-  - 
+  - ShadowLight
   - 
   - 
   - 
@@ -90,6 +90,9 @@ TagManager:
     locked: 0
   - name: MiddlegroundDark
     uniqueID: 1398727261
+    locked: 0
+  - name: ShadowLight
+    uniqueID: 3204178675
     locked: 0
   - name: ForegroundDark
     uniqueID: 1346046193
