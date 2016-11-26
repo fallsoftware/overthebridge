@@ -19,7 +19,7 @@ public class LevelFading : MonoBehaviour {
 
     void OnGUI() {
         this._alpha += this._fadeDirection * this.FadingSpeed * Time.deltaTime;
-        this._alpha = Mathf.Clamp01(this._fadeDirection);
+        this._alpha = Mathf.Clamp01(this._alpha);
         GUI.color 
             = new Color(GUI.color.r, GUI.color.g, GUI.color.b, this._alpha);
         GUI.depth = this._drawDepth;
