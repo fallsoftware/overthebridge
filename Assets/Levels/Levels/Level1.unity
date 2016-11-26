@@ -1529,8 +1529,6 @@ GameObject:
   - 224: {fileID: 1324308620}
   - 212: {fileID: 1324308623}
   - 114: {fileID: 1324308622}
-  - 95: {fileID: 1324308621}
-  - 61: {fileID: 1324308624}
   m_Layer: 11
   m_Name: Background1
   m_TagString: Untagged
@@ -1556,23 +1554,6 @@ RectTransform:
   m_AnchoredPosition: {x: 61, y: -51.5}
   m_SizeDelta: {x: 20, y: 11}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &1324308621
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1324308619}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: eb246d0b5265b704992c7ba2d48ff104, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &1324308622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1619,20 +1600,6 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!61 &1324308624
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1324308619}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 20, y: 11.77}
 --- !u!1 &1407242042
 GameObject:
   m_ObjectHideFlags: 0
