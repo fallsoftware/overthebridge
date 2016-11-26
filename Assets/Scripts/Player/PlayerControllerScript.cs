@@ -21,6 +21,8 @@ public class PlayerControllerScript : MonoBehaviour {
 	void Update() {
         if (this.MenuManager.IsPause) return;
 
+        this._animator.SetBool("Jump", !this._grounded);
+
         if ((!this._grounded && this._doubleJump) 
             || !Input.GetButtonDown("Jump")) return;
 
