@@ -20,11 +20,13 @@ public class PortalControllerScript : MonoBehaviour {
     private Vector3 _oldPosition;
     private bool _isTriggerUsed = false;
     private bool _controllerMode = false;
+    private SpawnEnemy _spawnEnemy;
 
     void Start() {
         this._player = GameObject.FindGameObjectWithTag("Player");
         this._animator = this.GetComponent<Animator>();
         this._portalPhysics = this.GetComponent<PortalPhysics>();
+        this._spawnEnemy = this.GetComponent<SpawnEnemy>();
         this._portalPhysics.ComputeColliders(false);
         this.PortalControllerSurface.transform.localScale = Vector3.one * 3.4f;
     }
@@ -78,7 +80,7 @@ public class PortalControllerScript : MonoBehaviour {
         }
     }
 
-    private void changeToNotSetState() {
+    public void changeToNotSetState() {
         this._animator.SetBool("Set", false);
         this._animator.SetBool("BeingSet", false);
         this._display = false;
@@ -100,6 +102,7 @@ public class PortalControllerScript : MonoBehaviour {
         this._animator.SetBool("BeingSet", false);
         this._display = false;
         this._portalPhysics.ComputeColliders(true);
+        this._spawnEnemy.SpawnNewEnemy();
     }
 
     private Vector2 getControllerAxis() {

@@ -13,7 +13,7 @@ public class PlayerControllerScript : MonoBehaviour {
     private bool _facingRight = true;
     private Animator _animator; 
     private float _groundRadius = 0.2f;
-    private bool _doubleJump = false;
+    public bool _doubleJump = false;
 
 	void Start() {
         this._animator = this.GetComponent<Animator>();
