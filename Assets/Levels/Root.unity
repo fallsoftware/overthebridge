@@ -378,7 +378,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.55
+  m_Radius: 2
 --- !u!114 &386870442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1030,11 +1030,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000011611203180, guid: 69733e0474d78bf4ca0832e9d1b9c733, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 45.3
+      value: 158.3
       objectReference: {fileID: 0}
     - target: {fileID: 4000011611203180, guid: 69733e0474d78bf4ca0832e9d1b9c733, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 60.2
+      value: -19.4
       objectReference: {fileID: 0}
     - target: {fileID: 4000011611203180, guid: 69733e0474d78bf4ca0832e9d1b9c733, type: 2}
       propertyPath: m_LocalPosition.z
