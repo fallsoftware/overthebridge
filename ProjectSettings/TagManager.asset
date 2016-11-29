@@ -12,6 +12,7 @@ TagManager:
   - Light
   - Portal Collider
   - Portal
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -26,8 +27,8 @@ TagManager:
   - Dark
   - Light
   - Portal
-  - ShadowLight
-  - 
+  - ShadowLightDark
+  - ShadowLightLight
   - 
   - 
   - 
@@ -70,6 +71,9 @@ TagManager:
   - name: MiddlegroundLight
     uniqueID: 1046247185
     locked: 0
+  - name: ShadowLightLight
+    uniqueID: 1547688991
+    locked: 0
   - name: ForegroundLight
     uniqueID: 2134744049
     locked: 0
@@ -91,7 +95,7 @@ TagManager:
   - name: MiddlegroundDark
     uniqueID: 1398727261
     locked: 0
-  - name: ShadowLight
+  - name: ShadowLightDark
     uniqueID: 3204178675
     locked: 0
   - name: ForegroundDark
