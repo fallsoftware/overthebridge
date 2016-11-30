@@ -5,7 +5,6 @@ public class PlayerControllerScript : MonoBehaviour {
     public float MaxSpeed = 100f;
     public Transform GroundCheck;
     public LayerMask WhatIsGround;
-    public float JumpForce = 7000f;
     public float jumpSpeed = 50f;
     public MenuManager MenuManager;
     public bool Grounded = false;
@@ -13,7 +12,7 @@ public class PlayerControllerScript : MonoBehaviour {
     private bool _facingRight = true;
     private Animator _animator; 
     private float _groundRadius = 0.2f;
-    public bool _doubleJump = false;
+    public bool _doubleJump = true;
 
 	void Start() {
         this._animator = this.GetComponent<Animator>();
@@ -44,7 +43,7 @@ public class PlayerControllerScript : MonoBehaviour {
         Rigidbody2D rigidbody2D = this.GetComponent<Rigidbody2D>();
 
         if (this.Grounded) {
-            this._doubleJump = false;
+            this._doubleJump = true;
         }
 
         this._animator.SetBool("Ground", this.Grounded);
