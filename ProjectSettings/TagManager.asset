@@ -74,6 +74,9 @@ TagManager:
   - name: ShadowLightLight
     uniqueID: 1547688991
     locked: 0
+  - name: LightWellLight
+    uniqueID: 793199251
+    locked: 0
   - name: ForegroundLight
     uniqueID: 2134744049
     locked: 0
@@ -97,6 +100,9 @@ TagManager:
     locked: 0
   - name: ShadowLightDark
     uniqueID: 3204178675
+    locked: 0
+  - name: LightWellDark
+    uniqueID: 1182526557
     locked: 0
   - name: ForegroundDark
     uniqueID: 1346046193
