@@ -170,7 +170,7 @@ TextMesh:
   m_Anchor: 7
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 200
+  m_FontSize: 150
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: 3cc02534c79f91d41ae09688e366fbd6, type: 3}
@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinDistance: 20
-  MaxDistance: 150
+  MaxDistance: 300
   Tolerance: 0.2
 --- !u!114 &114000013712117444
 MonoBehaviour:

@@ -7,6 +7,7 @@ public class PortalControllerScript : MonoBehaviour {
     public Vector2 position;
     public float MaxRadius = 60f;
     public float MinRadius = 0f;
+    public float PossessionState = 2;
     public GameObject PortalControllerSurface;
     public float AxisControllerTweak = 50f;
     public float AxisControllerMaxSpeed = 30f;
@@ -33,9 +34,12 @@ public class PortalControllerScript : MonoBehaviour {
 
     void Update() {
         if (this.MenuManager.IsPause) return;
-
-        this.handleStates();
-        this.displayPortalControllerSurface();
+        if (PossessionState==2)
+        {
+            this.handleStates();
+            this.displayPortalControllerSurface();
+        }
+        
     }
 
     private bool isTriggerPressed() {
@@ -89,7 +93,7 @@ public class PortalControllerScript : MonoBehaviour {
         this.handleLimit();
     }
 
-    private void changeToBeingSetState() {
+    public void changeToBeingSetState() {
         this._animator.SetBool("Set", false);
         this._animator.SetBool("BeingSet", true);
         this._display = true;
@@ -97,7 +101,7 @@ public class PortalControllerScript : MonoBehaviour {
         this._portalPhysics.ComputeColliders(false);
     }
 
-    private void changeToSetState() {
+    public void changeToSetState() {
         this._animator.SetBool("Set", true);
         this._animator.SetBool("BeingSet", false);
         this._display = false;

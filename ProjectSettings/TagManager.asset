@@ -13,6 +13,7 @@ TagManager:
   - Portal Collider
   - Portal
   - Enemy
+  - Fader
   layers:
   - Default
   - TransparentFX
