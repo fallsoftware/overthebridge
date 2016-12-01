@@ -15,6 +15,7 @@ public class PortalControllerScript : MonoBehaviour {
     public MenuManager MenuManager;
 
     private GameObject _player;
+    private Portal _portal;
     private Animator _animator;
     private PortalPhysics _portalPhysics;
     private bool _display = false;
@@ -28,17 +29,23 @@ public class PortalControllerScript : MonoBehaviour {
         this._animator = this.GetComponent<Animator>();
         this._portalPhysics = this.GetComponent<PortalPhysics>();
         this._spawnEnemy = this.GetComponent<SpawnEnemy>();
+        this._portal = this.GetComponent<Portal>();
         this._portalPhysics.ComputeColliders(false);
         this.PortalControllerSurface.transform.localScale = Vector3.one * 3.4f;
     }
 
     void Update() {
         if (this.MenuManager.IsPause) return;
-        if (PossessionState==2)
+        if (!_portal.InDark)
+        {
+
+        }
+        else if (PossessionState==2)
         {
             this.handleStates();
             this.displayPortalControllerSurface();
         }
+       
         
     }
 

@@ -672,6 +672,7 @@ GameObject:
   - 4: {fileID: 567596850}
   - 114: {fileID: 567596852}
   - 61: {fileID: 567596851}
+  - 114: {fileID: 567596853}
   m_Layer: 15
   m_Name: Checkpoint2
   m_TagString: Untagged
@@ -722,6 +723,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelManager: {fileID: 1571149302}
   Index: 1
+--- !u!114 &567596853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 567596849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d67a081147b2d574da31a462752ba877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionStartPortal: {fileID: 1956404287}
 --- !u!4 &600323989 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000011085788780, guid: 9cd92cb657510204ca273367d58f9f30,
@@ -798,6 +811,7 @@ GameObject:
   - 4: {fileID: 645852396}
   - 114: {fileID: 645852398}
   - 61: {fileID: 645852397}
+  - 114: {fileID: 645852399}
   m_Layer: 15
   m_Name: Checkpoint4
   m_TagString: Untagged
@@ -848,6 +862,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelManager: {fileID: 1571149302}
   Index: 3
+--- !u!114 &645852399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 645852395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d67a081147b2d574da31a462752ba877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionStartPortal: {fileID: 1956404287}
 --- !u!1 &690507234
 GameObject:
   m_ObjectHideFlags: 0
@@ -1212,7 +1238,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1046247185
+  m_SortingLayerID: 2134744049
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d81490f31e26a154f81977ae72dd756f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1431,6 +1457,7 @@ GameObject:
   - 4: {fileID: 825144691}
   - 114: {fileID: 825144693}
   - 61: {fileID: 825144692}
+  - 114: {fileID: 825144694}
   m_Layer: 15
   m_Name: Checkpoint3
   m_TagString: Untagged
@@ -1481,6 +1508,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelManager: {fileID: 1571149302}
   Index: 2
+--- !u!114 &825144694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 825144690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d67a081147b2d574da31a462752ba877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionStartPortal: {fileID: 1956404287}
 --- !u!1 &826629805
 GameObject:
   m_ObjectHideFlags: 0
@@ -1752,6 +1791,7 @@ GameObject:
   - 114: {fileID: 1009165419}
   - 61: {fileID: 1009165418}
   - 114: {fileID: 1009165420}
+  - 114: {fileID: 1009165421}
   m_Layer: 15
   m_Name: Checkpoint5
   m_TagString: Untagged
@@ -1811,6 +1851,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92bd041b13fcb6247b3d92b4a2f66b70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1009165421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1009165416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d4e4653e9706d94ca22e2805fcf41dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1078510077
@@ -2502,7 +2553,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1398727261
+  m_SortingLayerID: 1346046193
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7424b8accfdaa4a48b56fa864f4576d2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2519,8 +2570,8 @@ GameObject:
   - 4: {fileID: 1451887364}
   - 114: {fileID: 1451887362}
   - 61: {fileID: 1451887363}
-  - 114: {fileID: 1451887365}
   - 114: {fileID: 1451887366}
+  - 114: {fileID: 1451887365}
   m_Layer: 15
   m_Name: Checkpoint1
   m_TagString: Untagged

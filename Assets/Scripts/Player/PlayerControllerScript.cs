@@ -10,25 +10,28 @@ public class PlayerControllerScript : MonoBehaviour {
     public bool Grounded = false;
 
     private bool _facingRight = true;
-    private Animator _animator; 
+    private Animator _animator;
+    private Animator _lightAnimator;
     private float _groundRadius = 0.2f;
     public bool _doubleJump = true;
 
 	void Start() {
         this._animator = this.GetComponent<Animator>();
-	}
+        this._lightAnimator = this.transform.GetComponentInChildren<Animator>();
+
+    }
 	
 	void Update() {
         if (this.MenuManager.IsPause) return;
 
         this._animator.SetBool("Jump", !this.Grounded);
-
+        this._lightAnimator.SetBool("Jump", !this.Grounded);
         if ((!this.Grounded && this._doubleJump) 
             || !Input.GetButtonDown("Jump")) return;
 
 	    this._animator.SetBool("Ground", false);
-
-	    Rigidbody2D rigidbody2D = this.GetComponent<Rigidbody2D>();
+        this._lightAnimator.SetBool("Ground", false);
+        Rigidbody2D rigidbody2D = this.GetComponent<Rigidbody2D>();
         rigidbody2D.velocity = new Vector2(
        rigidbody2D.velocity.x,
        jumpSpeed);
@@ -48,8 +51,11 @@ public class PlayerControllerScript : MonoBehaviour {
 
         this._animator.SetBool("Ground", this.Grounded);
         this._animator.SetFloat("vSpeed", rigidbody2D.velocity.y);
+        this._lightAnimator.SetBool("Ground", this.Grounded);
+        this._lightAnimator.SetFloat("vSpeed", rigidbody2D.velocity.y);
         float move = Input.GetAxis("Horizontal");
         this._animator.SetFloat("Speed", Mathf.Abs(move));
+        this._lightAnimator.SetFloat("Speed", Mathf.Abs(move));
         rigidbody2D.velocity = new Vector2(
             move * this.MaxSpeed, 
             rigidbody2D.velocity.y);

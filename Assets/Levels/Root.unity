@@ -459,6 +459,7 @@ MonoBehaviour:
   OutSound: {fileID: 8300000, guid: 9e973002ed947cc44b751ce6a44a96e3, type: 3}
   InSound: {fileID: 8300000, guid: 2f4d3ee39cade684899079859ac9175b, type: 3}
   SoundFactor: 200
+  PlayerInside: 0
 --- !u!114 &386870443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1350,16 +1351,22 @@ Prefab:
       propertyPath: MenuManager
       value: 
       objectReference: {fileID: 651348460}
-    - target: {fileID: 212000013567725926, guid: 69733e0474d78bf4ca0832e9d1b9c733,
+    - target: {fileID: 212000012311651872, guid: 69733e0474d78bf4ca0832e9d1b9c733,
         type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 89b6b5089c288d844b9a051264a606f2,
-        type: 3}
-    - target: {fileID: 114000013480693950, guid: 69733e0474d78bf4ca0832e9d1b9c733,
-        type: 2}
-      propertyPath: _doubleJump
-      value: 1
+      propertyPath: m_SortingLayerID
+      value: 1640142047
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011078173386, guid: 69733e0474d78bf4ca0832e9d1b9c733, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000014066179154, guid: 69733e0474d78bf4ca0832e9d1b9c733, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013938531434, guid: 69733e0474d78bf4ca0832e9d1b9c733, type: 2}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 69733e0474d78bf4ca0832e9d1b9c733, type: 2}

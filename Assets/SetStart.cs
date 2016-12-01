@@ -12,7 +12,7 @@ public class SetStart : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Player" && _portal.PossessionState==0)
+        if (collision.gameObject.name == "Player" && _portal.PossessionState!=2)
         {
             _portal.transform.position = positionStartPortal.position;
             _portal.changeToSetState();
