@@ -6,6 +6,7 @@ public class ShadowLightPlatform : MonoBehaviour {
 
     public bool gravity = false;
     public float AerialTime=0.1f;
+    private float inertiaTime = 0.1f;
     public float acceleration=0.01f;
     public float speed = 0;
     public float maxspeed = 2;
@@ -15,6 +16,7 @@ public class ShadowLightPlatform : MonoBehaviour {
     private bool falling = false;
     private List<GameObject> collisionDown= new List<GameObject>();
     private List<GameObject> collisionUp = new List<GameObject>();
+    private PlayerControllerScript player=null;
     // Use this for initialization
     void Start () {
         InitialPosition = this.transform.position;
@@ -32,6 +34,10 @@ public class ShadowLightPlatform : MonoBehaviour {
             }
             
         }
+        else if (collider.CompareTag("Player"))
+        {
+            player = collider.gameObject.GetComponent<PlayerControllerScript>();
+        }
     }
     void OnTriggerExit2D(Collider2D collider) {
         if (collider.CompareTag("Ground")) {
@@ -44,21 +50,23 @@ public class ShadowLightPlatform : MonoBehaviour {
                 collisionDown.Remove(collider.gameObject);
             }
         }
+        else if (collider.CompareTag("Player"))
+        {
+            player.externalForce = Vector2.zero;
+            player = null;
+        }
     }
 
     public void ApllyForce(Vector2 Velocity)
     {
         falling = false;
-        if (gravity)
-        {
-            startTime = Time.time;
-        }
+        startTime = Time.time;
         if (collisionUp.Count == 0) {
-            if (rayspeed < maxspeed) {
-                rayspeed += acceleration;
+            gameObject.GetComponent<Rigidbody2D>().velocity = Velocity;
+            if(player != null)
+            {
+                player.externalForce = Velocity;
             }
-            gameObject.GetComponent<Rigidbody2D>().velocity = Velocity.normalized * rayspeed;
-            
         }
         else
         {
@@ -67,10 +75,12 @@ public class ShadowLightPlatform : MonoBehaviour {
 
     }
     // Update is called once per frame
-    void Update() {
-        if (gravity && collisionDown.Count == 0) { 
-            float timeleft = Time.time - startTime;
-            if(AerialTime - timeleft<=0)
+    void Update()
+    {
+        float timeleft = Time.time - startTime;
+        if (gravity && collisionDown.Count == 0)
+        {
+            if (AerialTime - timeleft <= 0)
             {
                 rayspeed = 0;
                 if (speed < maxspeed)
@@ -87,9 +97,17 @@ public class ShadowLightPlatform : MonoBehaviour {
                 speed = 0;
             }
         }
-        else if(collisionDown.Count != 0)
+        else if (collisionDown.Count != 0)
         {
             gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        }
+
+        else if (!gravity)
+        {
+            if (inertiaTime - timeleft <= 0)
+            {
+                gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            }
         }
     }
 }

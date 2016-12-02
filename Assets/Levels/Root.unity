@@ -459,7 +459,6 @@ MonoBehaviour:
   OutSound: {fileID: 8300000, guid: 9e973002ed947cc44b751ce6a44a96e3, type: 3}
   InSound: {fileID: 8300000, guid: 2f4d3ee39cade684899079859ac9175b, type: 3}
   SoundFactor: 200
-  PlayerInside: 0
 --- !u!114 &386870443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,7 +502,7 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   MaxRadius: 60
   MinRadius: 0
-  PossessionState: 0
+  PossessionState: 2
   PortalControllerSurface: {fileID: 1172514538}
   AxisControllerTweak: 50
   AxisControllerMaxSpeed: 3.5
@@ -1316,11 +1315,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000011611203180, guid: 69733e0474d78bf4ca0832e9d1b9c733, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -317
+      value: -285.6
       objectReference: {fileID: 0}
     - target: {fileID: 4000011611203180, guid: 69733e0474d78bf4ca0832e9d1b9c733, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -42
+      value: -219
       objectReference: {fileID: 0}
     - target: {fileID: 4000011611203180, guid: 69733e0474d78bf4ca0832e9d1b9c733, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1344,7 +1343,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011611203180, guid: 69733e0474d78bf4ca0832e9d1b9c733, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114000013480693950, guid: 69733e0474d78bf4ca0832e9d1b9c733,
         type: 2}
@@ -1367,6 +1366,14 @@ Prefab:
     - target: {fileID: 1000013938531434, guid: 69733e0474d78bf4ca0832e9d1b9c733, type: 2}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013132066488, guid: 69733e0474d78bf4ca0832e9d1b9c733, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 1389
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013132066488, guid: 69733e0474d78bf4ca0832e9d1b9c733, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 243
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 69733e0474d78bf4ca0832e9d1b9c733, type: 2}
@@ -1658,7 +1665,7 @@ Transform:
   - {fileID: 386870439}
   - {fileID: 1172514539}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!1 &1282228213
 GameObject:
   m_ObjectHideFlags: 0

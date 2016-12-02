@@ -16,7 +16,7 @@ public class GroundChecker : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.gameObject.CompareTag("Ground"))
+        if (collision.collider.gameObject.CompareTag("Ground")||collision.collider.gameObject.CompareTag("Portal Collider"))
         {
             player.Grounded = true;
         }

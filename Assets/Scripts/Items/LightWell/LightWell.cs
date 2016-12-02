@@ -118,7 +118,7 @@ public class LightWell : MonoBehaviour {
                             GameObject otherObject = hit.collider.gameObject;
                             if (otherObject.CompareTag("Player"))
                             {
-                                otherObject.GetComponent<Rigidbody2D>().velocity = direction * PlayerSpeed;
+                                otherObject.GetComponent<PlayerControllerScript>().InitBeam(PlayerSpeed * direction);
                                 otherObject.GetComponent<PlayerControllerScript>()._doubleJump = false;
 
                             }

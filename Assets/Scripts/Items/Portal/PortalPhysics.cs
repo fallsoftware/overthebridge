@@ -163,7 +163,7 @@ public class PortalPhysics : MonoBehaviour {
                         newArc.totalAngle = (int)Mathf.Round(
                         angles[i + 1] - angles[i]);
                     }
-                    newArc.offsetDouble = 0.01f;
+                    newArc.offsetDouble = 0.2f;
                     searchState = false;
                     newObjectCollider.transform.localPosition = Vector3.zero;
                 }
@@ -183,7 +183,7 @@ public class PortalPhysics : MonoBehaviour {
             ArcCollider2D newArc= newObjectCollider.AddComponent<ArcCollider2D>();
             newArc.offsetRotation = 0;
             newArc.radius = radius;
-            newArc.offsetDouble = 0.01f;
+            newArc.offsetDouble = 0.2f;
             newArc.totalAngle =360 ;
             newObjectCollider.transform.localPosition = Vector3.zero;
         }
