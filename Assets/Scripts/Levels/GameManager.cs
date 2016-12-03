@@ -10,7 +10,9 @@ public class GameManager : MonoBehaviour {
     private LevelFading _levelFading;
 
 	void Start() {
-	    this._levelFading = GameObject.FindObjectOfType<LevelFading>();
+        GameObject levelController 
+            = GameObject.FindGameObjectWithTag("LevelController");
+	    this._levelFading = levelController.GetComponent<LevelFading>();
         this.EntityManager = GameObject.FindObjectOfType<EntityManager>();
     }
 	
