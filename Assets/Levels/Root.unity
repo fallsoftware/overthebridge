@@ -332,10 +332,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 3cc02534c79f91d41ae09688e366fbd6, type: 3}
-    m_FontSize: 60
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 6
+    m_MinSize: 0
     m_MaxSize: 60
     m_Alignment: 5
     m_AlignByGeometry: 0
@@ -784,7 +784,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 3cc02534c79f91d41ae09688e366fbd6, type: 3}
-    m_FontSize: 60
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 6
@@ -1366,7 +1366,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 3cc02534c79f91d41ae09688e366fbd6, type: 3}
-    m_FontSize: 60
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 6
@@ -1776,7 +1776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e40e8b588daaf144a808aff0f7025c28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MusicSource: {fileID: 0}
+  MusicObject: {fileID: 0}
   musicVolume: 0.249
   fxVolume: 0.518
   LowPitchRange: 0.95
