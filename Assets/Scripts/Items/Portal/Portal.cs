@@ -9,9 +9,8 @@ public class Portal : MonoBehaviour {
     public bool InDark;
     public float ShineSpeed = 0.8f;
     public float Tolerance = 0.1f;
-    public AudioClip OutSound;
-    public AudioClip InSound;
-    public float SoundFactor = 1f;
+    public AudioClip PortalSound;
+    public float LightPitch = 1.5f;
 
     private AudioSource _audioSource;
     private Renderer _renderer;
@@ -24,11 +23,7 @@ public class Portal : MonoBehaviour {
         this._renderer.material.SetFloat("_ShineWidth", this.computeShineWidth(
             this._defaultShineLocation));
 
-        if (this.InDark) {
-            this.buildAudioSource(this.OutSound);
-        } else {
-            this.buildAudioSource(this.InSound);
-        }
+        this.buildAudioSource();
     }
 
     void Update() {
@@ -44,21 +39,20 @@ public class Portal : MonoBehaviour {
         }
 
         this.CheckIfPlayerStillInside();
-        this.updateAudioVolume();
     }
 
     void OnTriggerEnter2D(Collider2D collider2D) {
         if (!this.InDark || !this.checkIfPlayer(collider2D)) return;
 
         this.SetPlayerToLight();
-        this.updateAudioClip(this.InSound);
+        this.updateAudio();
     }
 
     void OnTriggerExit2D(Collider2D collider2D) {
         if (this.InDark || !this.checkIfPlayer(collider2D)) return;
         
         this.SetPlayerToDark();
-        this.updateAudioClip(this.OutSound);
+        this.updateAudio();
     }
 
     public void SetPlayerToDark() {
@@ -132,25 +126,18 @@ public class Portal : MonoBehaviour {
         return shineWidth;
     }
 
-    private void updateAudioVolume() {
-        if (!this.InDark) return;
-
-        Vector2 distance 
-            = this.Player.transform.position - this.transform.position;
-        this._audioSource.volume = 1/distance.sqrMagnitude;
-        this._audioSource.volume *= this.SoundFactor;
+    private void updateAudio() {
+        this._audioSource.pitch = this.InDark ? 1f : this.LightPitch;
+        SoundManager.Instance.PlayFx("Portal");
     }
 
-    private void updateAudioClip(AudioClip audioClip) {
-        this._audioSource.clip = audioClip;
-        this._audioSource.Play();
-    }
-
-    private void buildAudioSource(AudioClip audioClip) {
-        this._audioSource 
-            = SoundManager.Instance.gameObject.AddComponent<AudioSource>();
-        this._audioSource.loop = true;
-        this._audioSource.clip = audioClip;
-        this._audioSource.Play();
+    private void buildAudioSource() {
+        this._audioSource
+            = Sound.BuildFxSource(this.gameObject, this.PortalSound, true, 1f);
+        this._audioSource.name = "Portal";
+        this._audioSource.minDistance = 1f;
+        this._audioSource.maxDistance = 1.01f;
+        this._audioSource.volume = 2f;
+        this.updateAudio();
     }
 }

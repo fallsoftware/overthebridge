@@ -4143,6 +4143,7 @@ GameObject:
   - 4: {fileID: 1670084905}
   - 114: {fileID: 1670084904}
   - 114: {fileID: 1670084903}
+  - 114: {fileID: 1670084906}
   m_Layer: 0
   m_Name: Root
   m_TagString: Root
@@ -4198,6 +4199,20 @@ Transform:
   - {fileID: 1202687450}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &1670084906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1670084902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c38e9ac49ba2f544594c946f43f6dee3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MusicClip: {fileID: 8300000, guid: 0578ebf38095cc748ae1ba9eec0491f7, type: 3}
+  DisableOtherMusics: 1
+  Volume: 1
 --- !u!1 &1674605692
 GameObject:
   m_ObjectHideFlags: 0
