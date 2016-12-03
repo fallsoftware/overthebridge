@@ -755,8 +755,9 @@ GameObject:
   - 61: {fileID: 426585047}
   - 114: {fileID: 426585046}
   - 61: {fileID: 426585045}
+  - 114: {fileID: 426585048}
   m_Layer: 15
-  m_Name: SongTrigger
+  m_Name: SoundTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -819,6 +820,20 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 9.4655285}
   serializedVersion: 2
   m_Size: {x: 10, y: 350}
+--- !u!114 &426585048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 426585043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d013c41c4867e5d46a9deda72f64fb72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AmbianceClips:
+  - {fileID: 8300000, guid: 74f8be20145173c41862a958afeec1cd, type: 3}
+  AmbianceSources: []
 --- !u!1 &446027134
 GameObject:
   m_ObjectHideFlags: 0

@@ -133,8 +133,10 @@ public class Portal : MonoBehaviour {
 
     private void buildAudioSource() {
         this._audioSource
-            = Sound.BuildFxSource(this.gameObject, this.PortalSound, true, 1f);
-        this._audioSource.name = "Portal";
+            = Sound.BuildFxSource(this.gameObject, this.PortalSound, 
+            "Portal", true, 1f);
+        this._audioSource = SoundManager.Instance.AddFxSource(
+                    this._audioSource);
         this._audioSource.minDistance = 1f;
         this._audioSource.maxDistance = 1.01f;
         this._audioSource.volume = 2f;

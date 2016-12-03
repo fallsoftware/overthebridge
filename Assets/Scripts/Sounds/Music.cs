@@ -11,7 +11,7 @@ public class Music : MonoBehaviour {
 	void Start () {
 	    this.MusicSource = Sound.BuildMusicSource(
             this.gameObject, this.MusicClip);
-	}
+    }
 
 	void Update () {
 	
