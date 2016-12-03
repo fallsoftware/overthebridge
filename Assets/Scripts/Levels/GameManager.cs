@@ -3,13 +3,29 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
-    public LevelManager LevelManager;
+    public LevelManager LevelManager {
+        get { return this.levelManager; }
+        set {
+            this.levelManager = value;
+            this.levelManager.SetAmbiance();
+        }
+    }
+
+    public LevelManager levelManager;
     public EntityDeath Player;
     public PortalControllerScript Portal;
     public EntityManager EntityManager;
     private LevelFading _levelFading;
 
-	void Start() {
+    public static GameManager Instance = null;
+
+    void Start() {
+        if (GameManager.Instance == null) {
+            GameManager.Instance = this;
+        } else if (GameManager.Instance != this) {
+            Destroy(this.gameObject);
+        }
+
         GameObject levelController 
             = GameObject.FindGameObjectWithTag("LevelController");
 	    this._levelFading = levelController.GetComponent<LevelFading>();

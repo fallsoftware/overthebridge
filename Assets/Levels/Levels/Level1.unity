@@ -743,97 +743,6 @@ Transform:
   - {fileID: 703925907}
   m_Father: {fileID: 1678892994}
   m_RootOrder: 0
---- !u!1 &426585043
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1000010025063048, guid: f7eb778d29f10d642a21d619760679fe,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 426585044}
-  - 61: {fileID: 426585047}
-  - 114: {fileID: 426585046}
-  - 61: {fileID: 426585045}
-  - 114: {fileID: 426585048}
-  m_Layer: 15
-  m_Name: SoundTrigger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &426585044
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4000012142650742, guid: f7eb778d29f10d642a21d619760679fe,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 426585043}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -358, y: -78.64, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
---- !u!61 &426585045
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 426585043}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 524.65, y: 15.3}
-  serializedVersion: 2
-  m_Size: {x: 10, y: 350}
---- !u!114 &426585046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 426585043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c38e9ac49ba2f544594c946f43f6dee3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MusicClip: {fileID: 8300000, guid: c3fd5fa6952c4a744b13f63128f03c6a, type: 3}
-  Volume: 1
-  MusicSource: {fileID: 0}
---- !u!61 &426585047
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 61000013929798642, guid: f7eb778d29f10d642a21d619760679fe,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 426585043}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 9.4655285}
-  serializedVersion: 2
-  m_Size: {x: 10, y: 350}
---- !u!114 &426585048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 426585043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d013c41c4867e5d46a9deda72f64fb72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AmbianceClips:
-  - {fileID: 8300000, guid: 74f8be20145173c41862a958afeec1cd, type: 3}
-  AmbianceSources: []
 --- !u!1 &446027134
 GameObject:
   m_ObjectHideFlags: 0
@@ -1881,7 +1790,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000014266845344, guid: e8588d22d15fb9e41af15349b406e831, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4000014266845344, guid: e8588d22d15fb9e41af15349b406e831, type: 2}
       propertyPath: m_LocalScale.x
@@ -3256,6 +3165,51 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 14.417086}
   serializedVersion: 2
   m_Size: {x: 1, y: 29.834171}
+--- !u!1 &1299861034
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1299861035}
+  - 114: {fileID: 1299861036}
+  m_Layer: 0
+  m_Name: AmbianceTrigger
+  m_TagString: Ambiance
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1299861035
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1299861034}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 498.42386, y: -128.20868, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &1299861036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1299861034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d013c41c4867e5d46a9deda72f64fb72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AmbianceClips:
+  - {fileID: 8300000, guid: 74f8be20145173c41862a958afeec1cd, type: 3}
+  - {fileID: 8300000, guid: c3fd5fa6952c4a744b13f63128f03c6a, type: 3}
+  Volume: 1
+  AmbianceSources: []
 --- !u!1001 &1319624442
 Prefab:
   m_ObjectHideFlags: 0

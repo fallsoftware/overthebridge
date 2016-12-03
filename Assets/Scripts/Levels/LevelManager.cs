@@ -40,7 +40,10 @@ public class LevelManager : MonoBehaviour {
     }
 
     public void UpdateCheckpoint(Checkpoint checkpoint) {
-        this._gameManager.LevelManager = this;
+        if (this._gameManager.LevelManager != this) {
+            this._gameManager.LevelManager = this;
+        }
+
         this.LastCheckpoint = checkpoint;
     }
 
@@ -50,5 +53,21 @@ public class LevelManager : MonoBehaviour {
 
     public void OopsPlayerIsDead() {
         StartCoroutine(this._gameManager.GameOver());
+    }
+
+    public void SetAmbiance() {
+        if (SoundManager.Instance.CurrentScene == this.gameObject.scene.name) {
+            return;
+        }
+
+        GameObject[] ambiances = GameObject.FindGameObjectsWithTag("Ambiance");
+        int size = ambiances.Length;
+
+        for (int i = 0; i < size; i++) {
+            if (ambiances[i].scene.name == this.gameObject.scene.name) {
+                SoundManager.Instance.SwitchAmbiance(ambiances[i]);
+                return;
+            }
+        }
     }
 }

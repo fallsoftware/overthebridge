@@ -1776,11 +1776,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e40e8b588daaf144a808aff0f7025c28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MusicObject: {fileID: 0}
-  musicVolume: 0.249
-  fxVolume: 0.518
+  MusicFadeDuration: 2
+  FxFadeDuration: 1
   LowPitchRange: 0.95
   HighPitchRange: 1.05
+  SoundObject: {fileID: 0}
+  ambianceVolume: 1
+  fxVolume: 0.518
 --- !u!4 &1282228217
 Transform:
   m_ObjectHideFlags: 0

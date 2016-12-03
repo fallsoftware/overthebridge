@@ -4,21 +4,28 @@ using System.Collections.Generic;
 
 public class SoundManager : MonoBehaviour {
     public Dictionary<string, AudioSource> FxSources;
+    public float MusicFadeDuration = 2f;
+    public float FxFadeDuration = 1f;
+    public float LowPitchRange = .95f;
+    public float HighPitchRange = 1.05f;
+    public string CurrentScene = "Root";
+
     [HideInInspector]
-    public GameObject MusicObject;
-    public static SoundManager Instance = null;
+    public GameObject SoundObject;
+
+    public static SoundManager Instance = null;  
 
     [SerializeField]
-    public float MusicVolume {
-        get { return this.musicVolume; }
+    public float AmbianceVolume {
+        get { return this.ambianceVolume; }
         set {
-            this.musicVolume = value;
-            this.UpdateMusicVolume();
+            this.ambianceVolume = value;
+            this.UpdateAmbianceVolume();
         }
     }
 
     [Range(0f, 1f)]
-    public float musicVolume = 1f;
+    public float ambianceVolume = 1f;
 
     [SerializeField]
     public float FxVolume {
@@ -31,9 +38,6 @@ public class SoundManager : MonoBehaviour {
 
     [Range(0f, 1f)]
     public float fxVolume = 1f;
-
-    public float LowPitchRange = .95f;
-    public float HighPitchRange = 1.05f;
 
     void Start() {
     }
@@ -88,16 +92,10 @@ public class SoundManager : MonoBehaviour {
         fxSource.Play();
     }
 
-    public void PlayMusic(GameObject musicObject) {
-        Music music = musicObject.GetComponent<Music>();
-        music.MusicSource.Play();
-        StartCoroutine(this.fadeOut(musicObject));
-    }
-
     public void SetMusicVolume(float musicVolume) {
         musicVolume = Mathf.Clamp01(musicVolume);
 
-        this.MusicVolume = musicVolume;
+        this.AmbianceVolume = musicVolume;
     }
 
     public void SetFxVolume(float fxVolume) {
@@ -106,29 +104,67 @@ public class SoundManager : MonoBehaviour {
         this.FxVolume = fxVolume;
     }
 
-    public IEnumerator fadeOut(GameObject newMusicObject) {
-        float duration = 2f;
+    public IEnumerator FadeIn(AudioSource newSource, 
+        AudioSource oldSource = null, float duration = 2f, 
+        bool ambiance = true) {
         float startTime = Time.time;
         float endTime = startTime + duration;
-        Music newMusic = newMusicObject.GetComponent<Music>();
+        float volume = ambiance == true ? this.AmbianceVolume : this.FxVolume;
 
 
         while (Time.time < endTime) {
             float i = (Time.time - startTime) / duration;
 
-            if (this.MusicObject != null) {
-                Music oldMusic = this.MusicObject.GetComponent<Music>();
-                oldMusic.MusicSource.volume = (1 - i) * this.MusicVolume;
+            if (oldSource != null) {
+                oldSource.volume = (1 - i) * this.AmbianceVolume;
             }
 
-            newMusic.MusicSource.volume = i * this.MusicVolume;
+            newSource.volume = i * this.AmbianceVolume;
 
             yield return null;
         }
+    }
 
-        Destroy(this.MusicObject);
-        this.MusicObject = newMusicObject;
-        DontDestroyOnLoad(this.MusicObject);
+    public IEnumerator FadeOut(AudioSource audioSource, bool ambiance = true) {
+        float duration = 2f;
+        float startTime = Time.time;
+        float endTime = startTime + duration;
+        float volume = ambiance == true ? this.AmbianceVolume : this.FxVolume;
+
+        while (Time.time < endTime) {
+            float i = (Time.time - startTime) / duration;
+            audioSource.volume = (1 - i) * volume;
+
+            yield return null;
+        }
+    }
+
+    public void SwitchAmbiance(GameObject newAmbianceObject) {
+        List<AudioSource> newAmbiances 
+            = newAmbianceObject.GetComponent<Ambiance>().AmbianceSources;
+        int newSize = newAmbiances.Count;
+
+        for (int i = 0; i < newSize; i++) {
+            newAmbiances[i].Play();
+            StartCoroutine(this.FadeIn(newAmbiances[i]));
+        }
+
+        if (this.SoundObject != null) {
+            List<AudioSource> oldAmbiances
+                = this.SoundObject.GetComponent<Ambiance>().AmbianceSources;
+
+            int oldSize = oldAmbiances.Count;
+
+            for (int i = 0; i < oldSize; i++) {
+                StartCoroutine(this.FadeOut(oldAmbiances[i]));
+            }
+
+            Destroy(this.SoundObject);
+        }
+
+        this.SoundObject = newAmbianceObject;
+        this.CurrentScene = this.SoundObject.scene.name;
+        DontDestroyOnLoad(this.SoundObject);
     }
 
     public void UpdateFxVolume() {
@@ -138,8 +174,14 @@ public class SoundManager : MonoBehaviour {
         }
     }
 
-    public void UpdateMusicVolume() {
-        Music music = this.MusicObject.GetComponent<Music>();
-        music.MusicSource.volume = music.Volume * this.MusicVolume;
+    public void UpdateAmbianceVolume() {
+        Ambiance ambiance = this.SoundObject.GetComponent<Ambiance>();
+        List<AudioSource> ambianceSources = ambiance.AmbianceSources;
+        int size = ambianceSources.Count;
+
+        for (int i = 0; i < size; i++) {
+            ambianceSources[i].volume 
+                = ambianceSources[i].volume * this.ambianceVolume;
+        }
     }
 }

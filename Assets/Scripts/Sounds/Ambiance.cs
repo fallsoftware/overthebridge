@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class Ambiance : MonoBehaviour {
     public AudioClip[] AmbianceClips;
+    public float Volume = 1f;
 
     [HideInInspector]
     public List<AudioSource> AmbianceSources;
@@ -24,18 +25,11 @@ public class Ambiance : MonoBehaviour {
 
     }
 
-    void OnTriggerEnter2D(Collider2D collider2D) {
+    /*void OnTriggerEnter2D(Collider2D collider2D) {
         if (collider2D.gameObject.tag != "Player") return;
 
-        int size = this.AmbianceSources.Count;
+        if (SoundManager.Instance.SoundObject == this.gameObject) return;
 
-        for (int i = 0; i < size; i++) {
-            if (!SoundManager.Instance.FxSources.ContainsValue(
-                this.AmbianceSources[i])) {
-                AudioSource newFx = SoundManager.Instance.AddFxSource(
-                    this.AmbianceSources[i]);
-                SoundManager.Instance.PlayFx(newFx);
-            }
-        }
-    }
+        SoundManager.Instance.SwitchAmbiance(this.gameObject);
+    }*/
 }

@@ -7,7 +7,7 @@ public class LevelFading : MonoBehaviour {
 
     private int _drawDepth = -1000; // to be drawn last
     private float _alpha = 1.0f; // default alpha
-    private int _fadeDirection = -1; // -1 to be fadeIn (-1) or fadeOut (1)
+    private int _fadeDirection = -1; // -1 to be fadeIn (-1) or FadeIn (1)
 
     void Start () {
 	
