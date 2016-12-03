@@ -50,13 +50,18 @@ public class ArcCollider2D : MonoBehaviour {
 
     
     Vector2 origin, center;
-    
-    public Vector2[] getPoints(Vector2 off)
+    public void Start()
     {
+        EdgeCollider2D newObject =gameObject.AddComponent<EdgeCollider2D>();
+        newObject.points = getPoints();
+    }
+    public Vector2[] getPoints()
+    {
+
         List<Vector2> points = new List<Vector2>();
 
         origin = transform.localPosition;
-        center = origin + off;
+        center = origin;
         
         float ang = offsetRotation;
 

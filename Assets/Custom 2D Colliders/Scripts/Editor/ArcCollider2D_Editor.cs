@@ -34,7 +34,6 @@ public class ArcCollider_Editor : Editor {
     
     ArcCollider2D ac;
     EdgeCollider2D edgeCollider;
-    Vector2 off;
 
     void OnEnable()
     {
@@ -45,7 +44,7 @@ public class ArcCollider_Editor : Editor {
             ac.gameObject.AddComponent<EdgeCollider2D>();
             edgeCollider = ac.GetComponent<EdgeCollider2D>();
         }
-        edgeCollider.points = ac.getPoints(edgeCollider.offset);
+        edgeCollider.points = ac.getPoints();
     }
 
     public override void OnInspectorGUI()
@@ -53,11 +52,10 @@ public class ArcCollider_Editor : Editor {
         GUI.changed = false;
         DrawDefaultInspector();
 
-        if (GUI.changed || !off.Equals(edgeCollider.offset))
+        if (GUI.changed )
         {
-            edgeCollider.points = ac.getPoints(edgeCollider.offset);
+            edgeCollider.points = ac.getPoints();
         }
-        off = edgeCollider.offset;
     }
     
 }
