@@ -1817,6 +1817,7 @@ MonoBehaviour:
   FxFadeDuration: 1
   LowPitchRange: 0.95
   HighPitchRange: 1.05
+  CurrentScene: Root
   SoundObject: {fileID: 0}
   ambianceVolume: 1
   fxVolume: 0.518
@@ -2233,6 +2234,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   masks: {fileID: 544041045}
+  Sounds:
+  - {fileID: 8300000, guid: 6820a2d8f20cdf5429feda8316e2feb7, type: 3}
+  - {fileID: 8300000, guid: 370e57778b28ee240b4214883960b0ec, type: 3}
+  - {fileID: 8300000, guid: 629bfc73e0972c64e85f70403e9fe092, type: 3}
   enabled: 0
   frequency: 10
   pulses: 6
@@ -2890,7 +2895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c7e0b01845382a48ad9bf44e25ffff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelManager: {fileID: 0}
+  levelManager: {fileID: 0}
   Player: {fileID: 2010908653}
   Portal: {fileID: 386870445}
   EntityManager: {fileID: 0}

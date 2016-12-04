@@ -82,6 +82,15 @@ public class SoundManager : MonoBehaviour {
         fxSource.Play();
     }
 
+    public void PlayRandomizeFx(List<AudioSource> fxSources) {
+        int randomIndex = fxSources.Count-1;
+        float randomPitch = Random.Range(this.LowPitchRange,
+            this.HighPitchRange);
+        AudioSource fxSource = fxSources[randomIndex];
+        fxSource.pitch = randomPitch;
+        fxSource.Play();
+    }
+
     public void PlayFx(string fxSourceKey) {
         AudioSource fxSource = this.FxSources[fxSourceKey];
         this.PlayFx(fxSource);
