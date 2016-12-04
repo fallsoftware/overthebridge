@@ -139,6 +139,25 @@ public class SoundManager : MonoBehaviour {
         }
     }
 
+    public IEnumerator DeleteOldAmbiances(GameObject newAmbianceObject) {
+        if (this.SoundObject != null) {
+            List<AudioSource> oldAmbiances
+                = this.SoundObject.GetComponent<Ambiance>().AmbianceSources;
+
+            int oldSize = oldAmbiances.Count;
+
+            for (int i = 0; i < oldSize; i++) {
+                yield return StartCoroutine(this.FadeOut(oldAmbiances[i]));
+            }
+
+            Destroy(this.SoundObject);
+        }
+
+        this.SoundObject = newAmbianceObject;
+        this.CurrentScene = newAmbianceObject.scene.name;
+        DontDestroyOnLoad(this.SoundObject);
+    }
+
     public void SwitchAmbiance(GameObject newAmbianceObject) {
         List<AudioSource> newAmbiances 
             = newAmbianceObject.GetComponent<Ambiance>().AmbianceSources;
@@ -148,23 +167,8 @@ public class SoundManager : MonoBehaviour {
             newAmbiances[i].Play();
             StartCoroutine(this.FadeIn(newAmbiances[i]));
         }
-
-        if (this.SoundObject != null) {
-            List<AudioSource> oldAmbiances
-                = this.SoundObject.GetComponent<Ambiance>().AmbianceSources;
-
-            int oldSize = oldAmbiances.Count;
-
-            for (int i = 0; i < oldSize; i++) {
-                StartCoroutine(this.FadeOut(oldAmbiances[i]));
-            }
-
-            Destroy(this.SoundObject);
-        }
-
-        this.SoundObject = newAmbianceObject;
-        this.CurrentScene = this.SoundObject.scene.name;
-        DontDestroyOnLoad(this.SoundObject);
+        
+        StartCoroutine(this.DeleteOldAmbiances(newAmbianceObject));
     }
 
     public void UpdateFxVolume() {

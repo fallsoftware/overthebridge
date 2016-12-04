@@ -24,12 +24,4 @@ public class Ambiance : MonoBehaviour {
     void Update() {
 
     }
-
-    /*void OnTriggerEnter2D(Collider2D collider2D) {
-        if (collider2D.gameObject.tag != "Player") return;
-
-        if (SoundManager.Instance.SoundObject == this.gameObject) return;
-
-        SoundManager.Instance.SwitchAmbiance(this.gameObject);
-    }*/
 }
