@@ -518,7 +518,6 @@ GameObject:
   - 4: {fileID: 189506435}
   - 114: {fileID: 189506436}
   - 114: {fileID: 189506437}
-  - 61: {fileID: 189506438}
   m_Layer: 0
   m_Name: Rain
   m_TagString: Untagged
@@ -541,6 +540,8 @@ Transform:
   - {fileID: 1992393118}
   - {fileID: 1219525398}
   - {fileID: 572696628}
+  - {fileID: 454148592}
+  - {fileID: 2099562970}
   m_Father: {fileID: 0}
   m_RootOrder: 1
 --- !u!114 &189506436
@@ -595,20 +596,7 @@ MonoBehaviour:
   RainScript2D: {fileID: 189506436}
   SortingLayer: UI
   FadeSpeed: 0.0001
---- !u!61 &189506438
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 189506434}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 1376.54, y: -82}
-  serializedVersion: 2
-  m_Size: {x: 14.97, y: 141.59}
+  IsRaining: 0
 --- !u!1 &251944794
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,6 +915,77 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!1 &454148591
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 454148592}
+  - 61: {fileID: 454148593}
+  - 61: {fileID: 454148594}
+  - 114: {fileID: 454148595}
+  m_Layer: 0
+  m_Name: RainEnabler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &454148592
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 454148591}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 189506435}
+  m_RootOrder: 4
+--- !u!61 &454148593
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 454148591}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 1343, y: -82}
+  serializedVersion: 2
+  m_Size: {x: 14.97, y: 141.59}
+--- !u!61 &454148594
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 454148591}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 2052.3, y: 147}
+  serializedVersion: 2
+  m_Size: {x: 14.97, y: 141.59}
+--- !u!114 &454148595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 454148591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fc27c8f3ffc20a4583df51f26655c19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SetRain: {fileID: 189506437}
 --- !u!1 &465293443
 GameObject:
   m_ObjectHideFlags: 0
@@ -2202,7 +2261,7 @@ ParticleSystem:
   moveWithTransform: 1
   autoRandomSeed: 1
   scalingMode: 2
-  randomSeed: -210496250
+  randomSeed: 1103345081
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -9138,3 +9197,74 @@ PolygonCollider2D:
     - - {x: -2.217453, y: -40.858265}
       - {x: 3.661685, y: -21.340279}
       - {x: 10.6203, y: -47.744953}
+--- !u!1 &2099562969
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2099562970}
+  - 61: {fileID: 2099562972}
+  - 61: {fileID: 2099562971}
+  - 114: {fileID: 2099562973}
+  m_Layer: 0
+  m_Name: RainDisabler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2099562970
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2099562969}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 189506435}
+  m_RootOrder: 5
+--- !u!61 &2099562971
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2099562969}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 2091, y: 147}
+  serializedVersion: 2
+  m_Size: {x: 14.97, y: 141.59}
+--- !u!61 &2099562972
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2099562969}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 1292, y: -82}
+  serializedVersion: 2
+  m_Size: {x: 14.97, y: 141.59}
+--- !u!114 &2099562973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2099562969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d667f3c4bef22fb4b9b6eaa91a38dba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SetRain: {fileID: 189506437}

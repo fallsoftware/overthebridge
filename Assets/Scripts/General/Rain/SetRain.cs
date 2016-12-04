@@ -7,8 +7,8 @@ public class SetRain : MonoBehaviour {
     public RainScript2D RainScript2D;
     public string SortingLayer = "UI";
     public float FadeSpeed = 0.01f;
+    public bool IsRaining = false;
 
-    private bool _isRaining = false;
     private float _rainIntensity;
 
 	void Start () {
@@ -28,15 +28,7 @@ public class SetRain : MonoBehaviour {
 	
 	}
 
-    void OnTriggerEnter2D(Collider2D collider2D) {
-        if (collider2D.gameObject.tag != "Player") return;
-
-        if (this._isRaining) return;
-
-        StartCoroutine(this.makeItRain());
-    }
-
-    private IEnumerator makeItRain() {
+    public IEnumerator MakeItRain() {
         while (this.RainScript2D.RainIntensity < this._rainIntensity) {
             float oldIntensity = this.RainScript2D.RainIntensity;
             this.RainScript2D.RainIntensity 
@@ -45,5 +37,20 @@ public class SetRain : MonoBehaviour {
 
             yield return null;
         }
+
+        this.IsRaining = true;
+    }
+
+    public IEnumerator NoRainAnymore() {
+        while (this.RainScript2D.RainIntensity > 0) {
+            float oldIntensity = this.RainScript2D.RainIntensity;
+            this.RainScript2D.RainIntensity
+                = Mathf.Min(oldIntensity - this.FadeSpeed * Time.time,
+                this._rainIntensity);
+
+            yield return null;
+        }
+
+        this.IsRaining = false;
     }
 }
