@@ -430,7 +430,7 @@ Transform:
   - {fileID: 2066173996}
   - {fileID: 297180295}
   m_Father: {fileID: 1670084905}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!1001 &181587683
 Prefab:
   m_ObjectHideFlags: 0
@@ -518,6 +518,7 @@ GameObject:
   - 4: {fileID: 189506435}
   - 114: {fileID: 189506436}
   - 114: {fileID: 189506437}
+  - 61: {fileID: 189506438}
   m_Layer: 0
   m_Name: Rain
   m_TagString: Untagged
@@ -532,16 +533,16 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 189506434}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -789.5, y: -18, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1017116435}
   - {fileID: 1992393118}
   - {fileID: 1219525398}
   - {fileID: 572696628}
-  m_Father: {fileID: 386649694}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
 --- !u!114 &189506436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,7 +559,7 @@ MonoBehaviour:
   RainSoundLight: {fileID: 8300000, guid: c980eda1ec9b9ff4b930005976b00f41, type: 3}
   RainSoundMedium: {fileID: 8300000, guid: 3359e9d10af08ca46ae396298dbd1ed9, type: 3}
   RainSoundHeavy: {fileID: 8300000, guid: db1471092e49b7445bfbd374a17ea61a, type: 3}
-  RainIntensity: 0.552
+  RainIntensity: 1
   RainFallParticleSystem: {fileID: 1017116436}
   RainExplosionParticleSystem: {fileID: 1219525399}
   RainMistParticleSystem: {fileID: 1992393120}
@@ -591,7 +592,23 @@ MonoBehaviour:
   - {fileID: 1017116436}
   - {fileID: 1992393120}
   - {fileID: 1219525399}
+  RainScript2D: {fileID: 189506436}
   SortingLayer: UI
+  FadeSpeed: 0.0001
+--- !u!61 &189506438
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 189506434}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 1376.54, y: -82}
+  serializedVersion: 2
+  m_Size: {x: 14.97, y: 141.59}
 --- !u!1 &251944794
 GameObject:
   m_ObjectHideFlags: 0
@@ -771,16 +788,15 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 386649693}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1579, y: 36, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 189506435}
   - {fileID: 566125842}
   - {fileID: 1287565269}
-  m_Father: {fileID: 1670084905}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
 --- !u!4 &412043705 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000012205083258, guid: d099ed2388a16f9439bed5e885882127,
@@ -1011,7 +1027,7 @@ Transform:
   - {fileID: 1774803050}
   - {fileID: 22049572}
   m_Father: {fileID: 386649694}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!1 &566635349
 GameObject:
   m_ObjectHideFlags: 0
@@ -4105,7 +4121,7 @@ Transform:
   - {fileID: 1669333625}
   - {fileID: 1282788029}
   m_Father: {fileID: 1670084905}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!1 &1219525397
 GameObject:
   m_ObjectHideFlags: 0
@@ -5940,7 +5956,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 386649694}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!1 &1300479647
 GameObject:
   m_ObjectHideFlags: 0
@@ -6622,11 +6638,10 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 386649694}
   - {fileID: 145166536}
   - {fileID: 1202687450}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
 --- !u!1 &1674605692
 GameObject:
   m_ObjectHideFlags: 0
