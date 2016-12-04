@@ -21,7 +21,7 @@ public class SetRain : MonoBehaviour {
 
 	    this._rainIntensity = RainScript2D.RainIntensity;
 	    RainScript2D.RainIntensity = 0;
-        DontDestroyOnLoad(this.gameObject);
+	    RainScript2D.EnableWind = false;
 	}
 
 	void Update () {
@@ -39,6 +39,7 @@ public class SetRain : MonoBehaviour {
         }
 
         this.IsRaining = true;
+        RainScript2D.EnableWind = true;
     }
 
     public IEnumerator NoRainAnymore() {
@@ -52,5 +53,6 @@ public class SetRain : MonoBehaviour {
         }
 
         this.IsRaining = false;
+        RainScript2D.EnableWind = false;
     }
 }

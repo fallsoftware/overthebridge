@@ -518,6 +518,7 @@ GameObject:
   - 4: {fileID: 189506435}
   - 114: {fileID: 189506436}
   - 114: {fileID: 189506437}
+  - 114: {fileID: 189506438}
   m_Layer: 0
   m_Name: Rain
   m_TagString: Untagged
@@ -597,6 +598,17 @@ MonoBehaviour:
   SortingLayer: UI
   FadeSpeed: 0.0001
   IsRaining: 0
+--- !u!114 &189506438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 189506434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa2a4ebe6e38494db36f55474160271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &251944794
 GameObject:
   m_ObjectHideFlags: 0
