@@ -33,7 +33,13 @@ public class EndTrigger : MonoBehaviour {
 	}
 	
 	void Update () {
-	
+        this.BlackPanel.transform.position
+            = Camera.main.ScreenToWorldPoint(
+                new Vector3(Screen.width / 2, Screen.height / 2,
+                Camera.main.nearClipPlane));
+        this.BlackPanel.transform.position = new Vector3(this.BlackPanel.transform.position.x, this.BlackPanel.transform.position.y, 50);
+
+	    this.BlurPanel.transform.position = this.BlackPanel.transform.position;
 	}
 
     private Color setAlpha(Color color, float alpha) {
@@ -51,6 +57,8 @@ public class EndTrigger : MonoBehaviour {
         this.RainScript2D.EnableWind = false;
         this.SetRain.IsRaining = false;
         SoundManager.Instance.SwitchAmbiance(this.FinalSound.gameObject);
+        this.resizeSpriteToScreen(this.BlackPanel);
+        this.resizRendererToScreen(this.BlurPanel);
 
         while (!this.checkIfFinished()) {
             this.shiftAlphaBlackTexture();
@@ -124,5 +132,41 @@ public class EndTrigger : MonoBehaviour {
         newBlurriness = this.shiftValue(newBlurriness, this.BlurringSpeed);
 
         this.BlurPanel.material.SetFloat("_blurSizeXY", newBlurriness);
+    }
+
+    private void resizeSpriteToScreen(SpriteRenderer spriteRenderer) {
+        spriteRenderer.gameObject.transform.localScale
+            = Vector3.one;
+
+        float width = spriteRenderer.sprite.bounds.size.x;
+        float height = spriteRenderer.sprite.bounds.size.y;
+
+        double worldScreenHeight = Camera.main.orthographicSize * 2.0;
+        double worldScreenWidth 
+            = worldScreenHeight / Screen.height * Screen.width;
+
+        float newX = (float) worldScreenWidth / width;
+        float newY = (float)worldScreenHeight / height;
+
+        spriteRenderer.gameObject.transform.localScale 
+            = new Vector2(newX, newY);
+    }
+
+    private void resizRendererToScreen(Renderer renderer) {
+        renderer.gameObject.transform.localScale
+            = Vector3.one;
+
+        float width = renderer.bounds.size.x;
+        float height = renderer.bounds.size.y;
+
+        double worldScreenHeight = Camera.main.orthographicSize * 2.0;
+        double worldScreenWidth
+            = worldScreenHeight / Screen.height * Screen.width;
+
+        float newX = (float)worldScreenWidth / width;
+        float newY = (float)worldScreenHeight / height;
+
+        renderer.gameObject.transform.localScale
+            = new Vector2(newX, newY);
     }
 }

@@ -544,7 +544,7 @@ Transform:
   - {fileID: 454148592}
   - {fileID: 2099562970}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!114 &189506436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -636,8 +636,8 @@ Transform:
   m_LocalScale: {x: 1000, y: 10000, z: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 337154335}
-  m_RootOrder: 2
+  m_Father: {fileID: 756734450}
+  m_RootOrder: 1
 --- !u!212 &222524769
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -838,10 +838,8 @@ GameObject:
   - 222: {fileID: 337154334}
   - 223: {fileID: 337154333}
   - 114: {fileID: 337154332}
-  - 61: {fileID: 337154336}
-  - 114: {fileID: 337154337}
   m_Layer: 0
-  m_Name: EndTrigger
+  m_Name: Logo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -905,54 +903,13 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1761183006}
-  - {fileID: 344318371}
-  - {fileID: 222524768}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!61 &337154336
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 337154331}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 1126.82, y: -440}
-  serializedVersion: 2
-  m_Size: {x: 20.65, y: 620.95}
---- !u!114 &337154337
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 337154331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26d3766e5ec6895439284305a95f9703, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BlurPanel: {fileID: 344318372}
-  BlackPanel: {fileID: 222524769}
-  OverTheBridgeLogo: {fileID: 1761183007}
-  FadingSpeed: 0.25
-  BlackFadingSpeed: 0.1
-  ScaleSpeed: 0.02
-  BlurringSpeed: 2
-  RainFadingSpeed: 0.08
-  PlayerBody: {fileID: 0}
-  FinalLogoScale: 0.565
-  RainScript2D: {fileID: 189506436}
-  SetRain: {fileID: 189506437}
-  FinalSound: {fileID: 1522246279}
-  FinalSoundDuration: 7
 --- !u!1 &344318370
 GameObject:
   m_ObjectHideFlags: 0
@@ -980,8 +937,8 @@ Transform:
   m_LocalScale: {x: 1000, y: 10000, z: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 337154335}
-  m_RootOrder: 1
+  m_Father: {fileID: 756734450}
+  m_RootOrder: 0
 --- !u!212 &344318372
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1881,6 +1838,82 @@ Transform:
   m_PrefabParentObject: {fileID: 4000012225508466, guid: c5d9e3d884773fe4fa021b04dd0e75ee,
     type: 2}
   m_PrefabInternal: {fileID: 847115642}
+--- !u!1 &756734449
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 756734450}
+  - 61: {fileID: 756734452}
+  - 114: {fileID: 756734451}
+  m_Layer: 0
+  m_Name: EndTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &756734450
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 756734449}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children:
+  - {fileID: 344318371}
+  - {fileID: 222524768}
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 960, y: 540}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &756734451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 756734449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d3766e5ec6895439284305a95f9703, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BlurPanel: {fileID: 344318372}
+  BlackPanel: {fileID: 222524769}
+  OverTheBridgeLogo: {fileID: 1761183007}
+  FadingSpeed: 0.25
+  BlackFadingSpeed: 0.1
+  ScaleSpeed: 0.02
+  BlurringSpeed: 2
+  RainFadingSpeed: 0.08
+  PlayerBody: {fileID: 0}
+  FinalLogoScale: 0.565
+  RainScript2D: {fileID: 189506436}
+  SetRain: {fileID: 189506437}
+  FinalSound: {fileID: 1522246279}
+  FinalSoundDuration: 7
+--- !u!61 &756734452
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 756734449}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 1126.82, y: -440}
+  serializedVersion: 2
+  m_Size: {x: 20.65, y: 620.95}
 --- !u!1 &778255108
 GameObject:
   m_ObjectHideFlags: 0
@@ -7007,7 +7040,7 @@ Transform:
   - {fileID: 145166536}
   - {fileID: 1202687450}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!1 &1674605692
 GameObject:
   m_ObjectHideFlags: 0
