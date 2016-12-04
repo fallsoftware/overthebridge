@@ -147,6 +147,16 @@ public class SoundManager : MonoBehaviour {
     }
 
     public IEnumerator DeleteOldAmbiances(GameObject newAmbianceObject) {
+        yield return StartCoroutine(this.DeleteAmbiances());
+
+        if (newAmbianceObject != null) {
+            this.SoundObject = newAmbianceObject;
+            this.CurrentScene = newAmbianceObject.scene.name;
+            DontDestroyOnLoad(this.SoundObject);
+        }
+    }
+
+    public IEnumerator DeleteAmbiances() {
         if (this.SoundObject != null) {
             List<AudioSource> oldAmbiances
                 = this.SoundObject.GetComponent<Ambiance>().AmbianceSources;
@@ -158,11 +168,11 @@ public class SoundManager : MonoBehaviour {
             }
 
             Destroy(this.SoundObject);
-        }
 
-        this.SoundObject = newAmbianceObject;
-        this.CurrentScene = newAmbianceObject.scene.name;
-        DontDestroyOnLoad(this.SoundObject);
+            while (this.SoundObject != null) {
+                yield return null;
+            }
+        }
     }
 
     public void SwitchAmbiance(GameObject newAmbianceObject) {

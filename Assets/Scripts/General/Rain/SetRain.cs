@@ -29,7 +29,11 @@ public class SetRain : MonoBehaviour {
 	}
 
     public IEnumerator MakeItRain() {
-        while (this.RainScript2D.RainIntensity < this._rainIntensity) {
+        this.IsRaining = true;
+        RainScript2D.EnableWind = true;
+
+        while (this.RainScript2D.RainIntensity < this._rainIntensity 
+            && this.IsRaining) {
             float oldIntensity = this.RainScript2D.RainIntensity;
             this.RainScript2D.RainIntensity 
                 = Mathf.Min(oldIntensity + this.FadeSpeed * Time.time, 
@@ -37,9 +41,6 @@ public class SetRain : MonoBehaviour {
 
             yield return null;
         }
-
-        this.IsRaining = true;
-        RainScript2D.EnableWind = true;
     }
 
     public IEnumerator NoRainAnymore() {

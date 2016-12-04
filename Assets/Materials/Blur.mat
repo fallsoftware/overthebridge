@@ -33,7 +33,7 @@ Material:
       second: 0.078125
     - first:
         name: _blurSizeXY
-      second: 6.56
+      second: 7
     - first:
         name: blurSizeXY
       second: 4.6
