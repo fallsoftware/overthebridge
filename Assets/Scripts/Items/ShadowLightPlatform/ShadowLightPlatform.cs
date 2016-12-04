@@ -50,7 +50,7 @@ public class ShadowLightPlatform : MonoBehaviour {
                 collisionDown.Remove(collider.gameObject);
             }
         }
-        else if (collider.CompareTag("Player"))
+        else if (collider.CompareTag("Player")&&player!=null)
         {
             player.externalForce = Vector2.zero;
             player = null;
