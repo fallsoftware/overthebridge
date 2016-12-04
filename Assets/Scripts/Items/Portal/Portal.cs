@@ -128,7 +128,7 @@ public class Portal : MonoBehaviour {
 
     private void updateAudio() {
         this._audioSource.pitch = this.InDark ? 1f : this.LightPitch;
-        SoundManager.Instance.PlayFx("Portal");
+        SoundManager.Instance.PlayFx(this._audioSource);
     }
 
     private void buildAudioSource() {

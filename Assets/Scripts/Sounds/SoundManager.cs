@@ -80,6 +80,7 @@ public class SoundManager : MonoBehaviour {
         AudioSource fxSource = this.FxSources[fxSources[randomIndex]];
         fxSource.pitch = randomPitch;
         fxSource.Play();
+        StartCoroutine(this.RemoveFxSound(fxSource));
     }
 
     public void PlayRandomizeFx(List<AudioSource> fxSources) {
@@ -89,16 +90,13 @@ public class SoundManager : MonoBehaviour {
         AudioSource fxSource = fxSources[randomIndex];
         fxSource.pitch = randomPitch;
         fxSource.Play();
-    }
-
-    public void PlayFx(string fxSourceKey) {
-        AudioSource fxSource = this.FxSources[fxSourceKey];
-        this.PlayFx(fxSource);
+        StartCoroutine(this.RemoveFxSound(fxSource));
     }
 
     public void PlayFx(AudioSource fxSource) {
         fxSource.volume *= this.FxVolume;
         fxSource.Play();
+        StartCoroutine(this.RemoveFxSound(fxSource));
     }
 
     public void SetMusicVolume(float musicVolume) {
@@ -195,6 +193,13 @@ public class SoundManager : MonoBehaviour {
         for (int i = 0; i < size; i++) {
             ambianceSources[i].volume 
                 = ambianceSources[i].volume * this.ambianceVolume;
+        }
+    }
+
+    IEnumerator RemoveFxSound(AudioSource audioSource) {
+        if (this.FxSources.ContainsValue(audioSource)) {
+            yield return new WaitForSeconds(audioSource.clip.length);
+            this.FxSources.Remove(audioSource.name);
         }
     }
 }
