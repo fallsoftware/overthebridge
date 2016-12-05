@@ -501,7 +501,7 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   MaxRadius: 60
   MinRadius: 0
-  PossessionState: 2
+  PossessionState: 0
   PortalControllerSurface: {fileID: 1172514538}
   AxisControllerTweak: 50
   AxisControllerMaxSpeed: 3.5
@@ -2869,7 +2869,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b40662be68df645479d70583c72e6a7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FirstLevelToLoad: Level2
+  FirstLevelToLoad: Level1
   LevelsLoaded: []
 --- !u!4 &2111837773
 Transform:
