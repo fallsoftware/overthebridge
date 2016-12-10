@@ -501,7 +501,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   MaxRadius: 60
   MinRadius: 0
-  PossessionState: 2
   PortalControllerSurface: {fileID: 1172514538}
   AxisControllerTweak: 50
   AxisControllerMaxSpeed: 3.5

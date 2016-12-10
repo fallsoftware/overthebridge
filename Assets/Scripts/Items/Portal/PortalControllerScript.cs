@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
-using UnityEditorInternal;
 
 public class PortalControllerScript : MonoBehaviour {
     public Vector2 position;
