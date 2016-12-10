@@ -108,10 +108,10 @@ Material:
       second: 0.02
     - first:
         name: _ShineLocation
-      second: 0.5
+      second: 0.824
     - first:
         name: _ShineWidth
-      second: 0.5
+      second: 0.373
     - first:
         name: _SmoothnessTextureChannel
       second: 0
