@@ -2339,7 +2339,7 @@ GameObject:
   - 4: {fileID: 763969968}
   - 60: {fileID: 763969970}
   - 114: {fileID: 763969969}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: DeathZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}

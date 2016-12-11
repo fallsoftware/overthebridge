@@ -52,11 +52,20 @@ public class EndTrigger : MonoBehaviour {
         StartCoroutine(this.makeTheMagicHappen());
     }
 
-    private IEnumerator makeTheMagicHappen() {
+    public IEnumerator makeTheMagicHappen() {
         this.PlayerBody.constraints = RigidbodyConstraints2D.FreezeAll;
-        this.RainScript2D.EnableWind = false;
-        this.SetRain.IsRaining = false;
-        SoundManager.Instance.SwitchAmbiance(this.FinalSound.gameObject);
+        if (RainScript2D != null)
+        {
+            this.RainScript2D.EnableWind = false;
+        }
+        if (SetRain != null)
+        {
+            this.SetRain.IsRaining = false;
+        }
+        if (FinalSound != null)
+        {
+            SoundManager.Instance.SwitchAmbiance(this.FinalSound.gameObject);
+        }
         this.resizeSpriteToScreen(this.BlackPanel);
         this.resizRendererToScreen(this.BlurPanel);
 
@@ -79,18 +88,21 @@ public class EndTrigger : MonoBehaviour {
         return this.BlurPanel.material.GetFloat("_blurSizeXY") >= this._blurXY
                && this.OverTheBridgeLogo.color.a >= 1
                && this.BlackPanel.color.a >= 1
-               && this.OverTheBridgeLogo.gameObject.transform.localScale.x 
-               >= this.FinalLogoScale 
-               && this.RainScript2D.RainIntensity <= 0;
+               && this.OverTheBridgeLogo.gameObject.transform.localScale.x
+               >= this.FinalLogoScale;
     }
 
     private void shiftRainIntensity() {
-        float rainIntensity = this.RainScript2D.RainIntensity;
+        if (RainScript2D != null)
+        {
+            this.RainScript2D.EnableWind = false;
+            float rainIntensity = this.RainScript2D.RainIntensity;
 
-        if (rainIntensity <= 0) return;
+            if (rainIntensity <= 0) return;
 
-        this.RainScript2D.RainIntensity = this.shiftValue(rainIntensity, 
-            -this.RainFadingSpeed);
+            this.RainScript2D.RainIntensity = this.shiftValue(rainIntensity,
+                -this.RainFadingSpeed);
+        }
     }
 
     private float shiftValue(float value, float factor) {

@@ -501,6 +501,7 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   MaxRadius: 60
   MinRadius: 0
+  PossessionState: 2
   PortalControllerSurface: {fileID: 1172514538}
   AxisControllerTweak: 50
   AxisControllerMaxSpeed: 3.5
@@ -1392,11 +1393,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000011611203180, guid: 69733e0474d78bf4ca0832e9d1b9c733, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 551
+      value: 1665.9
       objectReference: {fileID: 0}
     - target: {fileID: 4000011611203180, guid: 69733e0474d78bf4ca0832e9d1b9c733, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -232.7
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 4000011611203180, guid: 69733e0474d78bf4ca0832e9d1b9c733, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1494,6 +1495,11 @@ Prefab:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 212000013567725926, guid: 69733e0474d78bf4ca0832e9d1b9c733,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 272ba847f100d4251bb8260575189042, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 69733e0474d78bf4ca0832e9d1b9c733, type: 2}
   m_IsPrefabParent: 0

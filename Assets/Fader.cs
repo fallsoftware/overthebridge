@@ -5,11 +5,12 @@ using System.Collections.Generic;
 public class Fader : MonoBehaviour {
     public GameObject masks;
     public AudioClip[] Sounds;
-    private LevelFading _levelFading;
+    public LevelFading _levelFading;
     public bool enabled = false;
     public float frequency=10.0f;
     public float pulses = 10;
     public float pulsesLength = 10;
+    public bool sound;
     private float currentpulse;
     private float currentpulses;
     private bool onPulse=false;
@@ -19,6 +20,10 @@ public class Fader : MonoBehaviour {
         _levelFading = gameObject.GetComponent<LevelFading>();
         this.initializeSounds();
 	}
+    public void setActiveWorld(bool state)
+    {
+        masks.SetActive(state);
+    }
     private void Update()
     {
         if (onPulse)
@@ -32,26 +37,40 @@ public class Fader : MonoBehaviour {
             if (currentpulses < 1)
             {
                 onPulse = false;
-                currentpulses = pulsesLength;
+                currentpulses = pulses;
             }
         }
     }
 
     public void StartChange(){
         enabled = true;
-        currentpulses = pulsesLength;
+        currentpulses = pulses;
         currentpulse = pulsesLength;
-
+        if (frequency < 1)
+        {
+            sound = false;
+            InvokeRepeating("SoundOnly", 0, 0.9f);
+        }
+        else
+        {
+            sound = true;
+        }
         InvokeRepeating("Pulse", 0, frequency);
         }
     public void Pulse() {
+        if (sound) 
         SoundManager.Instance.PlayRandomizeFx(this.SourceSounds);
         _levelFading.BeginFade(1);
         _levelFading.BeginFade(-1);
         onPulse = true;
     }
+    public void SoundOnly()
+    {
+        SoundManager.Instance.PlayRandomizeFx(this.SourceSounds);
+    }
     public void StopChange()
     {
+        onPulse = false;
         CancelInvoke();
     }
 
