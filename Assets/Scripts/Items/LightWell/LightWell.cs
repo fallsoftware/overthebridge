@@ -210,18 +210,16 @@ public class LightWell : MonoBehaviour {
 
     private void buildAudioSources() {
         this._eatSource
-            = Sound.BuildFxSource(this.gameObject, this.EatSound,
-            "LightWellEats" + this.GetInstanceID(), false, 0f);
+            = Sound.BuildFxSource(this.gameObject, this.EatSound, false, 0f);
         this._eatSource = SoundManager.Instance.AddFxSource(
-                    this._eatSource);
+                    this._eatSource, "LightWellEats" + this.GetInstanceID());
         this._eatSource.volume = 1f;
         this._eatSource.dopplerLevel = 0f;
 
         this._beamSource
-            = Sound.BuildFxSource(this.gameObject, this.BeamSound,
-            "LightWellBeam" + this.GetInstanceID(), true, 1f);
+            = Sound.BuildFxSource(this.gameObject, this.BeamSound, true, 1f);
         this._beamSource = SoundManager.Instance.AddFxSource(
-                    this._beamSource);
+                    this._beamSource, "LightWellBeam" + this.GetInstanceID());
         this._beamSource.volume = 1f;
         this._beamSource.dopplerLevel = 0f;
         SoundManager.Instance.PlayFx(this._beamSource);

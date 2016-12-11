@@ -56,15 +56,14 @@ public class SoundManager : MonoBehaviour {
         this.FxSources = new Dictionary<string, AudioSource>();
     }
 
-    public AudioSource AddFxSource(AudioSource fxSource) {
-        if (this.FxSources.ContainsKey(fxSource.name)) {
-            this.RemoveFxSound(this.FxSources[fxSource.name]);
+    public AudioSource AddFxSource(AudioSource fxSource, string key) {
+        if (this.FxSources.ContainsKey(key)) {
+            this.RemoveFxSound(this.FxSources[key]);
         }
 
-        this.FxSources.Add(fxSource.name, fxSource);
+        this.FxSources.Add(key, fxSource);
 
         return fxSource;
-        ;
     }
 
     public void PlaySingle(AudioClip audioClip) {
@@ -95,7 +94,6 @@ public class SoundManager : MonoBehaviour {
     }
 
     public void PlayFx(AudioSource fxSource) {
-        fxSource.volume *= this.FxVolume;
         fxSource.Play();
         StartCoroutine(this.RemoveFxSound(fxSource));
     }
@@ -219,6 +217,14 @@ public class SoundManager : MonoBehaviour {
             foreach (var key in keysToRemove) {
                 this.FxSources.Remove(key);
             }
+        }
+    }
+
+    IEnumerator RemoveFxSound(AudioSource audioSource, string key) {
+        if (this.FxSources.ContainsKey(key)) {
+            yield return new WaitForSeconds(audioSource.clip.length);
+
+            this.FxSources.Remove(key);
         }
     }
 }

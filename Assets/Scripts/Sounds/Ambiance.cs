@@ -15,8 +15,7 @@ public class Ambiance : MonoBehaviour {
 
         for (int i = 0; i < size; i++) {
             AudioSource newFx = Sound.BuildFxSource(
-                this.gameObject, this.AmbianceClips[i], 
-                this.AmbianceClips[i].name, true, 0f);
+                this.gameObject, this.AmbianceClips[i], true, 0f);
             this.AmbianceSources.Add(newFx);
         }
     }

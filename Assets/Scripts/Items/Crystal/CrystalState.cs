@@ -62,10 +62,10 @@ public class CrystalState : MonoBehaviour {
 
     private void buildAudioSource() {
         this._audioSource
-            = Sound.BuildFxSource(this.gameObject, this.CrystalSound,
-            "Crystal", true, 1f);
+            = Sound.BuildFxSource(this.gameObject, this.CrystalSound, true, 
+            1f);
         this._audioSource = SoundManager.Instance.AddFxSource(
-                    this._audioSource);
+                    this._audioSource, "Crystal" + this.GetInstanceID());
         this._audioSource.minDistance = 2f;
         this._audioSource.maxDistance = 10f;
         this._audioSource.volume = 1f;

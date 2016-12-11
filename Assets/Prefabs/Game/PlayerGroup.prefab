@@ -272,6 +272,8 @@ MonoBehaviour:
   jumpSpeed: 75
   MenuManager: {fileID: 0}
   Grounded: 0
+  externalForce: {x: 0, y: 0}
+  JumpSound: {fileID: 8300000, guid: ed541e3db4d777d44964db2a5a3b4c1a, type: 3}
   _doubleJump: 1
 --- !u!212 &212000012311651872
 SpriteRenderer:
