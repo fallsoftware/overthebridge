@@ -63,9 +63,9 @@ public class ShadowLightPlatform : MonoBehaviour {
         startTime = Time.time;
         if (collisionUp.Count == 0) {
             gameObject.GetComponent<Rigidbody2D>().velocity = Velocity;
-            if(player != null)
+            if(player != null )
             {
-                player.externalForce = Velocity;
+                player.externalForce.x = Velocity.x;
             }
         }
         else
