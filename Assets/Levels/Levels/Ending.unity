@@ -2236,6 +2236,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AmbianceClips:
+  - {fileID: 8300000, guid: dbd4ad14172ca3044bb5fd553cd54a97, type: 3}
+  - {fileID: 8300000, guid: bc8130ec4a115e74baa62f8828364799, type: 3}
   Volume: 1
   AmbianceSources: []
 --- !u!4 &1748953281
