@@ -222,6 +222,9 @@ public class LightWell : MonoBehaviour {
                     this._beamSource, "LightWellBeam" + this.GetInstanceID());
         this._beamSource.volume = 1f;
         this._beamSource.dopplerLevel = 0f;
+
+        this._beamSource.minDistance = 0.08f;
+        this._beamSource.maxDistance = 3f;
         SoundManager.Instance.PlayFx(this._beamSource);
     }
 }
