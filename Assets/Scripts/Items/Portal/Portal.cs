@@ -130,15 +130,19 @@ public class Portal : MonoBehaviour {
     private void updateAudio() {
         this._audioSource.pitch = this.InDark ? 1f : this.LightPitch;
 
-        if (this._animator.GetCurrentAnimatorStateInfo(0).IsName("BeingSet")) {
+        if (this._animator.GetCurrentAnimatorStateInfo(0).IsName("BeingSet") 
+            || this._animator.GetCurrentAnimatorStateInfo(0).IsName("NotSet")) 
+            {
             if (this._audioSource.volume > 0.02f) {
-                this._audioSource.volume = this._audioSource.volume - Time.deltaTime*10f;
+                this._audioSource.volume 
+                    = this._audioSource.volume - Time.deltaTime*10f;
             } else {
                 this._audioSource.volume = 0f;
             }
         } else if (this._audioSource.volume < 1f) {
             if (this._audioSource.volume < 0.98f) {
-                this._audioSource.volume = this._audioSource.volume + Time.deltaTime*10f;
+                this._audioSource.volume 
+                    = this._audioSource.volume + Time.deltaTime*10f;
             } else {
                 this._audioSource.volume = 1f;
             }
