@@ -123,7 +123,7 @@ public class SoundManager : MonoBehaviour {
             float i = (Time.time - startTime) / duration;
 
             if (oldSource != null) {
-                oldSource.volume = (1 - i) * this.AmbianceVolume;
+                oldSource.volume = (1 - i) * volume;
             }
 
             newSource.volume = i * this.AmbianceVolume;
@@ -132,8 +132,8 @@ public class SoundManager : MonoBehaviour {
         }
     }
 
-    public IEnumerator FadeOut(AudioSource audioSource, bool ambiance = true) {
-        float duration = 2f;
+    public IEnumerator FadeOut(AudioSource audioSource, float duration = 2f, 
+        bool ambiance = true) {
         float startTime = Time.time;
         float endTime = startTime + duration;
         float volume = ambiance == true ? this.AmbianceVolume : this.FxVolume;
