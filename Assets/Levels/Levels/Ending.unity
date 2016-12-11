@@ -1286,7 +1286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShineSpeed: 2
   ShinePeriod: 1.5
-  PortalSound: {fileID: 0}
+  CrystalSound: {fileID: 8300000, guid: cfa50c0b82c8abf49bb2bd44af588724, type: 3}
 --- !u!114 &932583077
 MonoBehaviour:
   m_ObjectHideFlags: 0

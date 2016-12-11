@@ -261,6 +261,8 @@ MonoBehaviour:
   width: 3
   material: {fileID: 2100000, guid: a347a9267a9dd1b4d93b42fb6a002136, type: 2}
   levelManager: {fileID: 1571149302}
+  EatSound: {fileID: 8300000, guid: 036e7f6eacf2bfa48aaf5fd7c17719e0, type: 3}
+  BeamSound: {fileID: 8300000, guid: 30fffd9868cd3b44da761f2415428875, type: 3}
 --- !u!95 &45235323
 Animator:
   serializedVersion: 3
@@ -1670,6 +1672,8 @@ MonoBehaviour:
   width: 3
   material: {fileID: 2100000, guid: a347a9267a9dd1b4d93b42fb6a002136, type: 2}
   levelManager: {fileID: 1571149302}
+  EatSound: {fileID: 8300000, guid: 036e7f6eacf2bfa48aaf5fd7c17719e0, type: 3}
+  BeamSound: {fileID: 8300000, guid: 30fffd9868cd3b44da761f2415428875, type: 3}
 --- !u!95 &620528262
 Animator:
   serializedVersion: 3
@@ -2464,6 +2468,8 @@ MonoBehaviour:
   width: 3
   material: {fileID: 2100000, guid: a347a9267a9dd1b4d93b42fb6a002136, type: 2}
   levelManager: {fileID: 1571149302}
+  EatSound: {fileID: 8300000, guid: 036e7f6eacf2bfa48aaf5fd7c17719e0, type: 3}
+  BeamSound: {fileID: 8300000, guid: 30fffd9868cd3b44da761f2415428875, type: 3}
 --- !u!95 &764316151
 Animator:
   serializedVersion: 3

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class SoundManager : MonoBehaviour {
     public Dictionary<string, AudioSource> FxSources;
@@ -57,7 +58,7 @@ public class SoundManager : MonoBehaviour {
 
     public AudioSource AddFxSource(AudioSource fxSource) {
         if (this.FxSources.ContainsKey(fxSource.name)) {
-            return this.FxSources[fxSource.name];
+            this.RemoveFxSound(this.FxSources[fxSource.name]);
         }
 
         this.FxSources.Add(fxSource.name, fxSource);
@@ -209,7 +210,15 @@ public class SoundManager : MonoBehaviour {
     IEnumerator RemoveFxSound(AudioSource audioSource) {
         if (this.FxSources.ContainsValue(audioSource)) {
             yield return new WaitForSeconds(audioSource.clip.length);
-            this.FxSources.Remove(audioSource.name);
+
+            var keysToRemove 
+                = this.FxSources.Where(kvp => kvp.Value == audioSource)
+                .Select(kvp => kvp.Key)
+                .ToArray();
+
+            foreach (var key in keysToRemove) {
+                this.FxSources.Remove(key);
+            }
         }
     }
 }
