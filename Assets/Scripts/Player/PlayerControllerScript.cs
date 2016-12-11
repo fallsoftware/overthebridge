@@ -9,6 +9,8 @@ public class PlayerControllerScript : MonoBehaviour {
     public MenuManager MenuManager;
     public bool Grounded = false;
     public Vector2 externalForce = Vector2.zero;
+    public AudioClip JumpSound;
+
     private bool _facingRight = true;
     private Animator _animator;
     private Animator _lightAnimator;
@@ -17,10 +19,14 @@ public class PlayerControllerScript : MonoBehaviour {
     private float inertiaTime = 0.1f;
     private float startTime = 0;
     private bool inbeam=false;
+    private AudioSource _jumpSource;
+    private bool _hasJumped = false;
 
     void Start() {
         this._animator = this.GetComponent<Animator>();
-        this._lightAnimator = this.transform.GetComponentInChildren<Animator>();
+        this._lightAnimator 
+            = this.transform.GetComponentInChildren<Animator>();
+        this.buildAudioSource();
 
     }
 	public void InitBeam(Vector2 BeamVelocity)
@@ -84,6 +90,13 @@ public class PlayerControllerScript : MonoBehaviour {
         } else if (move < 0 && this._facingRight) {
             this.Flip();
         }
+
+        if (this.Grounded) {
+            this._hasJumped = false;
+        } else if (!this.Grounded && !this._hasJumped) {
+            SoundManager.Instance.PlayFx(this._jumpSource);
+            this._hasJumped = true;
+        }
     }
 
     void Flip() {
@@ -91,5 +104,15 @@ public class PlayerControllerScript : MonoBehaviour {
         scale.x *= -1;
         this.transform.localScale = scale;
         this._facingRight = !this._facingRight;
+    }
+
+    private void buildAudioSource() {
+        this._jumpSource
+            = Sound.BuildFxSource(this.gameObject, this.JumpSound, false, 0f);
+        this._jumpSource = SoundManager.Instance.AddFxSource(
+                    this._jumpSource, "Jump" + this.GetInstanceID());
+        this._jumpSource.volume = 1f;
+        this._jumpSource.dopplerLevel = 0f;
+        this.Grounded = true;
     }
 }

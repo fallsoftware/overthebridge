@@ -18,6 +18,12 @@ public class LightWell : MonoBehaviour {
     private Animator _lightAnimator;
     private Animator _darkAnimator;
     public LevelManager levelManager;
+    public AudioClip EatSound;
+    public AudioClip BeamSound;
+
+    private AudioSource _eatSource;
+    private AudioSource _beamSource;
+
     // Use this for initialization
     void Start() {
         _darkAnimator = this.GetComponent<Animator>();
@@ -44,6 +50,7 @@ public class LightWell : MonoBehaviour {
         }
         _darkAnimator.SetBool("Active", activated);
         _lightAnimator.SetBool("Active", !activated);
+        this.buildAudioSources();
     }
 	public void ToggleBeam()
     {
@@ -188,6 +195,33 @@ public class LightWell : MonoBehaviour {
         if (other.tag != "Player") return;
         _darkAnimator.SetBool("Eats", true);
         _lightAnimator.SetBool("Eats", true);
+
+        SoundManager.Instance.PlayFx(this._eatSource);
         levelManager.OopsPlayerIsDead();
+    }
+
+    private void updateAudio() {
+        if (this.activated) {
+            this._beamSource.volume = 1f;
+        } else {
+            this._beamSource.volume = 0f;
+        }
+    }
+
+    private void buildAudioSources() {
+        this._eatSource
+            = Sound.BuildFxSource(this.gameObject, this.EatSound, false, 0f);
+        this._eatSource = SoundManager.Instance.AddFxSource(
+                    this._eatSource, "LightWellEats" + this.GetInstanceID());
+        this._eatSource.volume = 1f;
+        this._eatSource.dopplerLevel = 0f;
+
+        this._beamSource
+            = Sound.BuildFxSource(this.gameObject, this.BeamSound, true, 1f);
+        this._beamSource = SoundManager.Instance.AddFxSource(
+                    this._beamSource, "LightWellBeam" + this.GetInstanceID());
+        this._beamSource.volume = 1f;
+        this._beamSource.dopplerLevel = 0f;
+        SoundManager.Instance.PlayFx(this._beamSource);
     }
 }

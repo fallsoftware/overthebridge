@@ -80,7 +80,7 @@ public class Fader : MonoBehaviour {
 
         for (int i = 0; i < size; i++) {
             AudioSource newSound = Sound.BuildFxSource(this.gameObject, 
-                this.Sounds[i], "Level1Switch" + i, false, 0f);
+                this.Sounds[i], false, 0f);
             this.SourceSounds.Add(newSound);
         }
     }

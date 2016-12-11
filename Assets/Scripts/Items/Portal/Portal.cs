@@ -15,9 +15,11 @@ public class Portal : MonoBehaviour {
     private AudioSource _audioSource;
     private Renderer _renderer;
     private float _defaultShineLocation;
+    private Animator _animator;
 
     void Start() {
         this._renderer = this.GetComponent<Renderer>();
+        this._animator = this.GetComponent<Animator>();
         this._defaultShineLocation 
             = this._renderer.material.GetFloat("_ShineLocation");
         this._renderer.material.SetFloat("_ShineWidth", this.computeShineWidth(
@@ -39,20 +41,19 @@ public class Portal : MonoBehaviour {
         }
 
         this.CheckIfPlayerStillInside();
+        this.updateAudio();
     }
 
     void OnTriggerEnter2D(Collider2D collider2D) {
         if (!this.InDark || !this.checkIfPlayer(collider2D)) return;
 
         this.SetPlayerToLight();
-        this.updateAudio();
     }
 
     void OnTriggerExit2D(Collider2D collider2D) {
         if (this.InDark || !this.checkIfPlayer(collider2D)) return;
         
         this.SetPlayerToDark();
-        this.updateAudio();
     }
 
     public void SetPlayerToDark() {
@@ -128,18 +129,35 @@ public class Portal : MonoBehaviour {
 
     private void updateAudio() {
         this._audioSource.pitch = this.InDark ? 1f : this.LightPitch;
-        SoundManager.Instance.PlayFx(this._audioSource);
+
+        if (this._animator.GetCurrentAnimatorStateInfo(0).IsName("BeingSet") 
+            || this._animator.GetCurrentAnimatorStateInfo(0).IsName("NotSet")) 
+            {
+            if (this._audioSource.volume > 0.02f) {
+                this._audioSource.volume 
+                    = this._audioSource.volume - Time.deltaTime*10f;
+            } else {
+                this._audioSource.volume = 0f;
+            }
+        } else if (this._audioSource.volume < 1f) {
+            if (this._audioSource.volume < 0.98f) {
+                this._audioSource.volume 
+                    = this._audioSource.volume + Time.deltaTime*10f;
+            } else {
+                this._audioSource.volume = 1f;
+            }
+        }
     }
 
     private void buildAudioSource() {
         this._audioSource
-            = Sound.BuildFxSource(this.gameObject, this.PortalSound, 
-            "Portal", true, 1f);
+            = Sound.BuildFxSource(this.gameObject, this.PortalSound, true, 1f);
         this._audioSource = SoundManager.Instance.AddFxSource(
-                    this._audioSource);
-        this._audioSource.minDistance = 1f;
-        this._audioSource.maxDistance = 1.01f;
-        this._audioSource.volume = 2f;
+                    this._audioSource, "Portal" + this.GetInstanceID());
+        this._audioSource.minDistance = 30f;
+        this._audioSource.maxDistance = 50f;
+        this._audioSource.volume = 1f;
         this.updateAudio();
+        SoundManager.Instance.PlayFx(this._audioSource);
     }
 }

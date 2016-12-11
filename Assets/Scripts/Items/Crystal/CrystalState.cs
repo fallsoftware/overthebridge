@@ -4,7 +4,7 @@ using System.Collections;
 public class CrystalState : MonoBehaviour {
     public float ShineSpeed = 0.8f;
     public float ShinePeriod = 3f;
-    public AudioClip PortalSound;
+    public AudioClip CrystalSound;
 
     private AudioSource _audioSource;
     private Renderer _renderer;
@@ -17,6 +17,7 @@ public class CrystalState : MonoBehaviour {
             = this._renderer.material.GetFloat("_ShineLocation");
         this._renderer.material.SetFloat("_ShineWidth", this.computeShineWidth(
             this._defaultShineLocation));
+        this.buildAudioSource();
     }
 
 	void Update () {
@@ -57,5 +58,18 @@ public class CrystalState : MonoBehaviour {
         }
 
         return shineWidth;
+    }
+
+    private void buildAudioSource() {
+        this._audioSource
+            = Sound.BuildFxSource(this.gameObject, this.CrystalSound, true, 
+            1f);
+        this._audioSource = SoundManager.Instance.AddFxSource(
+                    this._audioSource, "Crystal" + this.GetInstanceID());
+        this._audioSource.minDistance = 2f;
+        this._audioSource.maxDistance = 10f;
+        this._audioSource.volume = 1f;
+        this._audioSource.dopplerLevel = 0f;
+        SoundManager.Instance.PlayFx(this._audioSource);
     }
 }
