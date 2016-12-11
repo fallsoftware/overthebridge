@@ -1259,7 +1259,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 801444857}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 526, y: -565, z: 0}
+  m_LocalPosition: {x: 1023, y: -680, z: 0}
   m_LocalScale: {x: 1000, y: 10000, z: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -2235,7 +2235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d013c41c4867e5d46a9deda72f64fb72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AmbianceClips:
+  AmbianceClips: []
   Volume: 1
   AmbianceSources: []
 --- !u!4 &1748953281
