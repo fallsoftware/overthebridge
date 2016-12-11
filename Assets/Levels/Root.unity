@@ -2869,7 +2869,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b40662be68df645479d70583c72e6a7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FirstLevelToLoad: Level1
+  FirstLevelToLoad: Ending
   LevelsLoaded: []
 --- !u!4 &2111837773
 Transform:
