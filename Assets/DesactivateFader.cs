@@ -14,6 +14,7 @@ public class DesactivateFader : MonoBehaviour {
         if (collision.gameObject.name == "Player")
         {
             _fader.StopChange();
+            _fader.setActiveWorld(false);
         }
     }
 }
