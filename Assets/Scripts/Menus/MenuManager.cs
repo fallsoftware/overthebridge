@@ -20,6 +20,7 @@ public class MenuManager : MonoBehaviour {
 
     public void LaunchRootScene() {
         SceneManager.LoadScene(this.RootScene);
+        Time.timeScale = 1f;
     }
 
     public void QuitGame() {
