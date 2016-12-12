@@ -16,6 +16,7 @@ TagManager:
   - Fader
   - LevelController
   - Ambiance
+  - Rain
   layers:
   - Default
   - TransparentFX

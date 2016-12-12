@@ -170,8 +170,9 @@ namespace DigitalRuby.RainMaker
             }
         }
 
-        protected override void Update()
-        {
+        protected override void Update() {
+
+            if (Camera == null) Destroy(this.gameObject);
             base.Update();
             if (Camera != null)
             {
